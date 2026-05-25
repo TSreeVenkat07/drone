@@ -1,0 +1,15 @@
+--- Baseline Eval on Resume (Epoch 1) ---
+Epoch: 1 (resumed) | Scenario: ['building_collapse'] | Difficulty: easy
+Cov Improv: +20.7% | Latency Red: -2468.0%
+MARL Cov: 0.0% | Vic: 0.00/7 | Col: 0.0
+
+--- Baseline Eval on Resume (Epoch 1) ---
+Epoch: 1 (resumed) | Scenario: ['building_collapse'] | Difficulty: easy
+Cov Improv: +20.0% | Latency Red: -328.0%
+MARL Cov: 0.0% | Vic: 0.00/7 | Col: 0.0
+
+--- Baseline Eval on Resume (Epoch 1) ---
+Epoch: 1 (resumed) | Scenario: ['building_collapse'] | Difficulty: easy
+Cov Improv: +34.5% | Latency Red: -2792.9%
+MARL Cov: 0.0% | Vic: 0.00/7 | Col: 0.0
+
