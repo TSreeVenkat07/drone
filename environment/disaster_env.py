@@ -106,6 +106,12 @@ class DisasterEnv(gym.Env):
         if hasattr(self.map_gen, 'env_thermal_map'):
             self.thermal_map = np.clip(self.thermal_map + self.map_gen.env_thermal_map, 0.0, 1.0)
             
+        # Extract environmental smoke map
+        if hasattr(self.map_gen, 'env_smoke_map'):
+            self.smoke_map = self.map_gen.env_smoke_map.copy()
+        else:
+            self.smoke_map = np.zeros((self.grid_size, self.grid_size), dtype=np.float32)
+            
         self.victim_found = np.zeros(self.n_victims, dtype=bool)
         self.coverage_map = np.zeros((self.grid_size, self.grid_size), dtype=np.float32)
         self.agent_positions = self._spawn_agents()
@@ -128,13 +134,32 @@ class DisasterEnv(gym.Env):
         for i in range(self.n_agents):
             key = f"agent_{i}"
             action = actions[key]
-            dr, dc = self.ACTION_DELTAS[action]
             r, c = self.agent_positions[i]
+
+            # Smoke navigation drift effect (30% * intensity chance to pick random action)
+            if hasattr(self, 'smoke_map') and self.smoke_map is not None:
+                smoke_intensity = self.smoke_map[r, c]
+                if smoke_intensity > 0.3 and np.random.random() < (smoke_intensity * 0.3):
+                    mask = self._get_action_mask(i)
+                    valid_actions = np.where(mask)[0]
+                    if len(valid_actions) > 0:
+                        action = int(np.random.choice(valid_actions))
+
+            # Floodwater slow-movement effect (30% chance to hover/delay)
+            if self.obstacle_map[r, c] == 0.5:
+                if np.random.random() < 0.3:
+                    action = 8 # Force Hover
+
+            # Floodwater restricted battery penalty (double depletion rate)
+            if self.obstacle_map[r, c] == 0.5:
+                self.agent_battery[i] -= 1.0
+
+            dr, dc = self.ACTION_DELTAS[action]
             nr, nc = r + dr, c + dc
 
             # --- TIER 2: Safety (collision penalties, severe) ---
             if not (0 <= nr < self.grid_size and 0 <= nc < self.grid_size):
-                rewards[key] += self.rcfg["tier2_safety"]["out_of_bounds"]
+                # rewards[key] += self.rcfg["tier2_safety"]["out_of_bounds"]
                 self.collision_counts[i] += 1
                 continue
 
@@ -143,7 +168,7 @@ class DisasterEnv(gym.Env):
                 base = self.rcfg["tier2_safety"]["wall_collision"]
                 if self.collision_counts[i] >= self.rcfg["tier2_safety"]["repeated_collision_threshold"]:
                     base *= self.rcfg["tier2_safety"]["repeated_collision_multiplier"]
-                rewards[key] += base
+                # rewards[key] += base
                 self.collision_counts[i] += 1
                 continue
 
@@ -152,7 +177,7 @@ class DisasterEnv(gym.Env):
                 nnr, nnc = nr + dr2, nc + dc2
                 if 0 <= nnr < self.grid_size and 0 <= nnc < self.grid_size:
                     if self.obstacle_map[nnr, nnc] == 1:
-                        rewards[key] += self.rcfg["tier2_safety"]["near_wall_soft"]
+                        # rewards[key] += self.rcfg["tier2_safety"]["near_wall_soft"]
                         break
 
             # Agent-agent collision check (positions after moves are applied)
@@ -162,15 +187,16 @@ class DisasterEnv(gym.Env):
         for i in range(self.n_agents):
             for j in range(i + 1, self.n_agents):
                 if np.array_equal(self.agent_positions[i], self.agent_positions[j]):
-                    rewards[f"agent_{i}"] += self.rcfg["tier2_safety"]["agent_collision"]
-                    rewards[f"agent_{j}"] += self.rcfg["tier2_safety"]["agent_collision"]
+                    # rewards[f"agent_{i}"] += self.rcfg["tier2_safety"]["agent_collision"]
+                    # rewards[f"agent_{j}"] += self.rcfg["tier2_safety"]["agent_collision"]
                     self.collision_counts[i] += 1
                     self.collision_counts[j] += 1
                 else:
                     dist = np.linalg.norm(self.agent_positions[i] - self.agent_positions[j])
                     if dist < 3.0:
-                        rewards[f"agent_{i}"] += self.rcfg["tier2_safety"]["near_agent_soft"]
-                        rewards[f"agent_{j}"] += self.rcfg["tier2_safety"]["near_agent_soft"]
+                        # rewards[f"agent_{i}"] += self.rcfg["tier2_safety"]["near_agent_soft"]
+                        # rewards[f"agent_{j}"] += self.rcfg["tier2_safety"]["near_agent_soft"]
+                        pass
 
         # --- TIER 3: Coverage rewards ---
         new_coverage = self._update_coverage()
@@ -180,10 +206,11 @@ class DisasterEnv(gym.Env):
         frontier_cells = self._count_frontier_cells()
         for i in range(self.n_agents):
             key = f"agent_{i}"
-            rewards[key] += shared_coverage_reward
+            # rewards[key] += shared_coverage_reward
             # Frontier bonus proportional to agent's frontier coverage
             if frontier_cells > 0:
-                rewards[key] += self.rcfg["tier3_coverage"]["frontier_bonus"] * 0.1
+                # rewards[key] += self.rcfg["tier3_coverage"]["frontier_bonus"] * 0.1
+                pass
 
         # Coverage milestones (shared global reward)
         coverage_pct = total_coverage / (self.grid_size ** 2) * 100
@@ -193,12 +220,14 @@ class DisasterEnv(gym.Env):
                 self.coverage_milestone_achieved.add(milestone)
                 split = self.rcfg["tier3_coverage"][rwd_key] / self.n_agents
                 for i in range(self.n_agents):
-                    rewards[f"agent_{i}"] += split
+                    # rewards[f"agent_{i}"] += split
+                    pass
 
         # Zone clearance bonus
         zone_bonus = self._check_zone_clearance() * self.rcfg["tier3_coverage"]["zone_clearance"] / self.n_agents
         for i in range(self.n_agents):
-            rewards[f"agent_{i}"] += zone_bonus
+            # rewards[f"agent_{i}"] += zone_bonus
+            pass
 
         # --- TIER 1: Victim detection (DOMINANT reward) ---
         for i in range(self.n_agents):
@@ -225,13 +254,14 @@ class DisasterEnv(gym.Env):
                                 if 0 <= ntr < self.grid_size and 0 <= ntc < self.grid_size:
                                     self.thermal_map[ntr, ntc] = 0.0
                         # First detection bonus
-                        rewards[key] += self.rcfg["tier1_victim"]["first_detection"]
+                        # rewards[key] += self.rcfg["tier1_victim"]["first_detection"]
                         # Speed bonus: decays over episode
                         speed_factor = self.rcfg["tier1_victim"]["detection_speed_decay"] ** self.step_count
-                        rewards[key] += self.rcfg["tier1_victim"]["detection_speed_bonus_max"] * speed_factor
+                        # rewards[key] += self.rcfg["tier1_victim"]["detection_speed_bonus_max"] * speed_factor
                         # Thermal confirmation if close enough
                         if dist <= 1:
-                            rewards[key] += self.rcfg["tier1_victim"]["thermal_confirmation"]
+                            # rewards[key] += self.rcfg["tier1_victim"]["thermal_confirmation"]
+                            pass
                     else:
                         # Multi-agent corroboration bonus (second agent verifies)
                         already_corroborated = sum(1 for j in range(self.n_agents)
@@ -239,25 +269,29 @@ class DisasterEnv(gym.Env):
                                                     abs(self.agent_positions[j][0] - vr) +
                                                     abs(self.agent_positions[j][1] - vc) <= self.thermal_radius)
                         if already_corroborated >= 1:
-                            rewards[key] += self.rcfg["tier1_victim"]["multi_agent_corroboration"] * 0.1
+                            # rewards[key] += self.rcfg["tier1_victim"]["multi_agent_corroboration"] * 0.1
+                            pass
 
         # All victims found mega-bonus
         if self.victim_found.all() and not hasattr(self, "_all_found_rewarded"):
             self._all_found_rewarded = True
             split = self.rcfg["tier1_victim"]["all_victims_found"] / self.n_agents
             for i in range(self.n_agents):
-                rewards[f"agent_{i}"] += split
+                # rewards[f"agent_{i}"] += split
+                pass
 
         # --- TIER 4: Team coordination ---
         spread_bonus = self._compute_spread_bonus()
         for i in range(self.n_agents):
-            rewards[f"agent_{i}"] += spread_bonus
+            # rewards[f"agent_{i}"] += spread_bonus
+            pass
 
         # --- TIER 5: Temporal ---
         for i in range(self.n_agents):
-            rewards[f"agent_{i}"] += self.rcfg["tier5_temporal"]["time_step_penalty"]
+            # rewards[f"agent_{i}"] += self.rcfg["tier5_temporal"]["time_step_penalty"]
             if np.array_equal(self.agent_positions[i], list(prev_positions[i])):
-                rewards[f"agent_{i}"] += self.rcfg["tier5_temporal"]["hover_penalty"]
+                # rewards[f"agent_{i}"] += self.rcfg["tier5_temporal"]["hover_penalty"]
+                pass
             self.agent_battery[i] -= 1.0
 
         # Mission complete bonus
@@ -266,14 +300,16 @@ class DisasterEnv(gym.Env):
         if terminated:
             split = self.rcfg["tier5_temporal"]["mission_complete"] / self.n_agents
             for i in range(self.n_agents):
-                rewards[f"agent_{i}"] += split
+                # rewards[f"agent_{i}"] += split
+                pass
 
         # End-of-episode missed victim penalty
         if truncated and not terminated:
             missed = int((~self.victim_found).sum())
             penalty = self.rcfg["tier1_victim"]["missed_victim_end_penalty"] * missed / self.n_agents
             for i in range(self.n_agents):
-                rewards[f"agent_{i}"] += penalty
+                # rewards[f"agent_{i}"] += penalty
+                pass
 
         obs = self._build_observations()
         info = {
@@ -321,9 +357,9 @@ class DisasterEnv(gym.Env):
         count = 0
         for r in range(1, self.grid_size - 1):
             for c in range(1, self.grid_size - 1):
-                if self.coverage_map[r, c] > 0 and self.obstacle_map[r, c] == 0:
+                if self.coverage_map[r, c] > 0 and self.obstacle_map[r, c] < 1:
                     for dr, dc in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
-                        if self.coverage_map[r + dr, c + dc] == 0 and self.obstacle_map[r + dr, c + dc] == 0:
+                        if self.coverage_map[r + dr, c + dc] == 0 and self.obstacle_map[r + dr, c + dc] < 1:
                             count += 1
                             break
         return count
@@ -336,8 +372,8 @@ class DisasterEnv(gym.Env):
                                      ((half, self.grid_size), (0, half)),
                                      ((half, self.grid_size), (half, self.grid_size))]:
             zone = self.obstacle_map[r0:r1, c0:c1]
-            passable = (zone == 0).sum()
-            covered = (self.coverage_map[r0:r1, c0:c1][zone == 0] > 0).sum()
+            passable = (zone < 1).sum()
+            covered = (self.coverage_map[r0:r1, c0:c1][zone < 1] > 0).sum()
             if passable > 0 and covered / passable >= 0.9:
                 zones_cleared += 1
         return zones_cleared
@@ -380,11 +416,24 @@ class DisasterEnv(gym.Env):
         # Local occupancy grid (11x11)
         pad = self.obs_radius
         local = np.full((2 * pad + 1, 2 * pad + 1), -1.0, dtype=np.float32)
+        
+        # Smoke visibility noise factor
+        smoke_intensity = 0.0
+        if hasattr(self, 'smoke_map') and self.smoke_map is not None:
+            smoke_intensity = self.smoke_map[r, c]
+
         for dr in range(-pad, pad + 1):
             for dc in range(-pad, pad + 1):
                 nr, nc = r + dr, c + dc
                 if 0 <= nr < gs and 0 <= nc < gs:
-                    local[dr + pad, dc + pad] = float(self.obstacle_map[nr, nc])
+                    val = float(self.obstacle_map[nr, nc])
+                    # If in smoke, introduce random noise/flip to occupancy (reduced visibility)
+                    if smoke_intensity > 0.3 and np.random.random() < (smoke_intensity * 0.4):
+                        if val == 0.0:
+                            val = 1.0
+                        elif val == 1.0:
+                            val = 0.0
+                    local[dr + pad, dc + pad] = val
 
         # Thermal map (5x5)
         tp = self.thermal_radius

@@ -1,0 +1,15 @@
+Training on: cuda
+Loading checkpoint: checkpoints/epoch_0043.pt
+Evaluation Config - Difficulty: medium, Scenarios: ['building_collapse']
+Running evaluation (20 episodes)...
+
+==================================================
+EVALUATION RESULT: US (MARL) VS GREEDY (EPOCH 43)
+==================================================
+Metric             | US (MARL)       | Greedy Baseline
+-------------------|-----------------|----------------
+Avg Coverage       | 36.46%          | 62.71%
+Avg Victims Found  | 1.25 / 7        | 1.80 / 7
+Avg Collisions     | 0.00            | 1061.90
+Avg Steps          | 500.0            | 500.0
+==================================================

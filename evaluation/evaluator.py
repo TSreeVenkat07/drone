@@ -42,12 +42,7 @@ class Evaluator:
                 actions = {}
                 for i in range(self.n_agents):
                     key = f"agent_{i}"
-                    obs_t = torch.FloatTensor(obs[key]).unsqueeze(0).to(self.device)
-                    mask_t = torch.BoolTensor(masks[key]).unsqueeze(0).to(self.device)
-                    with torch.no_grad():
-                        q = self.agents[i].online_net(obs_t, mask_t)
-                        action = int(q.argmax().item())
-                    actions[key] = action
+                    actions[key] = self.agents[i].select_action(obs[key], masks[key], explore=False)
 
                 obs, rewards, terminated, truncated, info = env.step(actions)
                 done = terminated or truncated

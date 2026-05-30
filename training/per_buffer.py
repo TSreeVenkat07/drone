@@ -92,9 +92,36 @@ class PrioritizedReplayBuffer:
 
     def update_priorities(self, indices: np.ndarray, td_errors: np.ndarray):
         for idx, err in zip(indices, td_errors):
+            # Guard against NaN/Inf TD errors to protect the SumTree
+            if not np.isfinite(err):
+                err = 0.0
             priority = (abs(err) + self.epsilon) ** self.alpha
             self.tree.update(int(idx), priority)
             self.max_priority = max(self.max_priority, priority)
 
+    def trim_to_newest(self, keep_fraction: float = 0.30):
+        """Trim the buffer to keep only the newest fraction of transitions."""
+        current_size = self.tree.size
+        keep_count = int(current_size * keep_fraction)
+        if keep_count <= 0:
+            return
+        
+        # Identify the indices of the newest elements
+        newest_indices = set()
+        for i in range(1, keep_count + 1):
+            idx = (self.tree.ptr - i) % self.tree.capacity
+            newest_indices.add(idx)
+            
+        # Clear all other elements
+        for idx in range(self.tree.capacity):
+            if idx not in newest_indices:
+                self.tree.data[idx] = None
+                self.tree.update(idx, 0.0) # Set priority to 0 so it's not sampled
+                
+        # Update sizes
+        self.tree.size = keep_count
+        print(f"Trimmed replay buffer from {current_size} to newest {keep_count} elements.")
+
     def __len__(self):
         return self.tree.size
+

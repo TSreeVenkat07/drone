@@ -4,57 +4,65 @@ from typing import Dict
 
 class FloodScenario:
     """
-    Flood scenario: water-covered areas (impassable), islands of dry land,
-    elevated ground near buildings. Victims stranded on isolated patches.
-    Paths between islands are narrow and unstable.
+    Flood Scenario: Urban flood disaster environment.
+    Includes building blocks, roads, and open spaces.
+    Some roads are flooded (restricted/slow-movement zones).
+    Debris obstacles block certain road paths.
+    Safe elevated dry land is on top of dry buildings.
     """
     def __init__(self, cfg: Dict):
         self.grid_size = cfg["grid_size"]
         self.rng = np.random.default_rng()
+        self.flood_map = np.zeros((self.grid_size, self.grid_size), dtype=float)
 
     def generate(self, obstacle_density: float) -> np.ndarray:
         grid = np.zeros((self.grid_size, self.grid_size), dtype=np.int8)
+        self.flood_map = np.zeros((self.grid_size, self.grid_size), dtype=float)
 
-        # Water level simulation via Perlin-like noise
-        water_map = np.zeros((self.grid_size, self.grid_size), dtype=float)
-        # Multi-scale noise for realistic flood terrain
-        for scale in [4, 8, 16]:
-            freq = 1.0 / scale
-            for r in range(self.grid_size):
-                for c in range(self.grid_size):
-                    water_map[r, c] += np.sin(r * freq * np.pi) * np.cos(c * freq * np.pi)
+        # 1. Create a structured urban layout: roads and buildings
+        road_width = 2
+        block_size = 6
+        cycle = road_width + block_size # 8
+        
+        for r in range(self.grid_size):
+            for c in range(self.grid_size):
+                is_road_h = (r % cycle) < road_width
+                is_road_v = (c % cycle) < road_width
+                if not (is_road_h or is_road_v):
+                    # Building block area
+                    grid[r, c] = 1 # Mark as building/obstacle by default
 
-        # Normalize
-        water_map = (water_map - water_map.min()) / (water_map.max() - water_map.min() + 1e-8)
-        # Water covers low-lying areas
-        grid[water_map < obstacle_density] = 1
+        # 2. Simulate floodwater covering low-lying roads
+        # We simulate a water source (e.g. river overflow) rising from one side or center
+        center_r = self.rng.integers(10, 22)
+        center_c = self.rng.integers(10, 22)
+        
+        for r in range(self.grid_size):
+            for c in range(self.grid_size):
+                # Distance-based water depth/flooding
+                dist = np.sqrt((r - center_r) ** 2 + (c - center_c) ** 2)
+                depth = np.clip(1.0 - dist / (self.grid_size * 0.4), 0.0, 1.0)
+                self.flood_map[r, c] = depth
 
-        # Elevated island clusters (guaranteed dry land)
-        n_islands = self.rng.integers(3, 7)
-        for _ in range(n_islands):
-            ir = self.rng.integers(4, self.grid_size - 4)
-            ic = self.rng.integers(4, self.grid_size - 4)
-            radius = self.rng.integers(2, 5)
-            for dr in range(-radius, radius + 1):
-                for dc in range(-radius, radius + 1):
-                    if dr ** 2 + dc ** 2 <= radius ** 2:
-                        nr, nc = ir + dr, ic + dc
-                        if 0 <= nr < self.grid_size and 0 <= nc < self.grid_size:
-                            grid[nr, nc] = 0
+        # Mark flooded road cells as soft obstacles (represented as value 2 on the raw grid map)
+        for r in range(self.grid_size):
+            for c in range(self.grid_size):
+                if grid[r, c] == 0 and self.flood_map[r, c] > 0.3:
+                    # Flooded road
+                    grid[r, c] = 2
 
-        # Narrow bridges between islands (1-2 cell wide paths)
-        n_bridges = self.rng.integers(2, 5)
-        for _ in range(n_bridges):
-            r1 = self.rng.integers(5, self.grid_size - 5)
-            c1 = self.rng.integers(5, self.grid_size - 5)
-            r2 = self.rng.integers(5, self.grid_size - 5)
-            c2 = self.rng.integers(5, self.grid_size - 5)
-            # Horizontal then vertical path
-            for c in range(min(c1, c2), max(c1, c2) + 1):
-                grid[r1, c] = 0
-            for r in range(min(r1, r2), max(r1, r2) + 1):
-                grid[r, c2] = 0
+        # 3. Add debris obstacles (value 1) randomly blocking roads
+        n_debris = self.rng.integers(15, 30)
+        for _ in range(n_debris):
+            # Find a road cell (either flooded or dry)
+            for _ in range(50):
+                r = self.rng.integers(road_width, self.grid_size - road_width)
+                c = self.rng.integers(road_width, self.grid_size - road_width)
+                if grid[r, c] == 0 or grid[r, c] == 2:
+                    grid[r, c] = 1 # Completely blocked by debris obstacle
+                    break
 
+        # Ensure boundaries are impassable walls
         grid[0, :] = 1
         grid[-1, :] = 1
         grid[:, 0] = 1

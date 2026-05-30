@@ -1,0 +1,101 @@
+======================================================================
+FINAL EVALUATION REPORT - MARL vs GREEDY (BUILDING COLLAPSE)
+Checkpoint: checkpoints/latest.pt
+======================================================================
+
+--- DIFFICULTY: EASY (20 eps) ---
+  Coverage:   MARL=45.1% | Greedy=64.1% | Improv: -29.7%
+  Latency:    MARL=104.4 steps | Greedy=9.5 steps | Reduc: -998.9%
+  Collisions: MARL=82.70/ep | Greedy=2512.10/ep
+  Det. Acc:   24.3% (Found: 1.70/7)
+
+--- DIFFICULTY: MEDIUM (20 eps) ---
+  Coverage:   MARL=40.4% | Greedy=61.8% | Improv: -34.6%
+  Latency:    MARL=103.2 steps | Greedy=33.8 steps | Reduc: -205.2%
+  Collisions: MARL=19.50/ep | Greedy=1243.00/ep
+  Det. Acc:   21.4% (Found: 1.50/7)
+
+--- DIFFICULTY: HARD (20 eps) ---
+  Coverage:   MARL=38.5% | Greedy=51.5% | Improv: -25.3%
+  Latency:    MARL=77.4 steps | Greedy=202.4 steps | Reduc: +61.8%
+  Collisions: MARL=17.10/ep | Greedy=93.20/ep
+  Det. Acc:   24.3% (Found: 1.70/7)
+
+======================================================================
+OVERALL COMBINED MIXED RESULTS (EASY + MEDIUM + HARD)
+======================================================================
+  Coverage:   MARL=41.3% | Greedy=59.1% | Improvement: -30.1% (target: >= +30%)
+  Latency:    MARL=95.0steps | Greedy=81.9steps | Reduction: -16.0% (target: -20%)
+  Collisions: MARL=39.77/ep | Greedy=1282.77/ep (target MARL: 0-2)
+  Det. acc:   23.3% (target: >=90%)
+  Goals:
+    [NO - NOT MET] coverage_+30pct
+    [NO - NOT MET] latency_-20pct
+    [NO - NOT MET] collisions_0to2
+    [NO - NOT MET] detection_accuracy_90pct
+  ALL GOALS ACHIEVED: NO
+======================================================================
+
+======================================================================
+DETAILED EPISODE LOG & VICTIM LOCATIONS
+======================================================================
+Difficulty: easy | Ep: 0 | Victims Location Grid Coordinate: [(6, 30), (9, 6), (23, 27), (21, 10), (21, 2), (14, 30), (5, 18)] | MARL Found: 2 | MARL Col: 4 | MARL Cov: 58.1% | Greedy Cov: 65.7%
+Difficulty: easy | Ep: 1 | Victims Location Grid Coordinate: [(13, 17), (2, 20), (17, 4), (7, 22), (24, 24), (5, 22), (9, 22)] | MARL Found: 0 | MARL Col: 128 | MARL Cov: 39.6% | Greedy Cov: 64.2%
+Difficulty: easy | Ep: 2 | Victims Location Grid Coordinate: [(23, 28), (26, 16), (19, 3), (29, 31), (10, 4), (30, 23), (25, 12)] | MARL Found: 5 | MARL Col: 146 | MARL Cov: 51.9% | Greedy Cov: 62.6%
+Difficulty: easy | Ep: 3 | Victims Location Grid Coordinate: [(29, 13), (9, 10), (24, 22), (21, 27), (27, 23), (5, 9), (23, 9)] | MARL Found: 2 | MARL Col: 70 | MARL Cov: 41.0% | Greedy Cov: 62.7%
+Difficulty: easy | Ep: 4 | Victims Location Grid Coordinate: [(12, 4), (5, 20), (23, 4), (8, 24), (8, 16), (1, 13), (5, 18)] | MARL Found: 0 | MARL Col: 0 | MARL Cov: 37.8% | Greedy Cov: 80.7%
+Difficulty: easy | Ep: 5 | Victims Location Grid Coordinate: [(9, 12), (4, 22), (28, 26), (26, 23), (5, 6), (24, 3), (21, 21)] | MARL Found: 3 | MARL Col: 446 | MARL Cov: 50.1% | Greedy Cov: 66.3%
+Difficulty: easy | Ep: 6 | Victims Location Grid Coordinate: [(18, 27), (23, 10), (13, 24), (29, 8), (17, 28), (9, 7), (25, 19)] | MARL Found: 2 | MARL Col: 242 | MARL Cov: 42.1% | Greedy Cov: 63.8%
+Difficulty: easy | Ep: 7 | Victims Location Grid Coordinate: [(27, 4), (22, 21), (12, 25), (13, 13), (28, 23), (5, 28), (17, 2)] | MARL Found: 2 | MARL Col: 0 | MARL Cov: 42.4% | Greedy Cov: 65.7%
+Difficulty: easy | Ep: 8 | Victims Location Grid Coordinate: [(29, 25), (6, 29), (19, 25), (13, 6), (5, 3), (14, 10), (16, 20)] | MARL Found: 2 | MARL Col: 0 | MARL Cov: 44.1% | Greedy Cov: 66.5%
+Difficulty: easy | Ep: 9 | Victims Location Grid Coordinate: [(7, 16), (11, 16), (12, 24), (15, 7), (18, 2), (17, 12), (10, 26)] | MARL Found: 1 | MARL Col: 0 | MARL Cov: 59.0% | Greedy Cov: 62.6%
+Difficulty: easy | Ep: 10 | Victims Location Grid Coordinate: [(3, 4), (27, 23), (23, 22), (28, 23), (25, 17), (27, 28), (8, 7)] | MARL Found: 2 | MARL Col: 0 | MARL Cov: 34.0% | Greedy Cov: 61.9%
+Difficulty: easy | Ep: 11 | Victims Location Grid Coordinate: [(30, 2), (21, 11), (31, 30), (13, 24), (19, 14), (19, 30), (1, 4)] | MARL Found: 2 | MARL Col: 0 | MARL Cov: 41.7% | Greedy Cov: 63.6%
+Difficulty: easy | Ep: 12 | Victims Location Grid Coordinate: [(20, 24), (24, 14), (30, 26), (16, 29), (15, 4), (16, 3), (13, 10)] | MARL Found: 0 | MARL Col: 30 | MARL Cov: 45.3% | Greedy Cov: 58.3%
+Difficulty: easy | Ep: 13 | Victims Location Grid Coordinate: [(6, 26), (14, 29), (22, 11), (8, 9), (7, 7), (1, 31), (28, 25)] | MARL Found: 2 | MARL Col: 178 | MARL Cov: 42.9% | Greedy Cov: 63.3%
+Difficulty: easy | Ep: 14 | Victims Location Grid Coordinate: [(28, 6), (10, 30), (25, 24), (26, 28), (20, 30), (3, 28), (15, 11)] | MARL Found: 2 | MARL Col: 0 | MARL Cov: 42.7% | Greedy Cov: 62.0%
+Difficulty: easy | Ep: 15 | Victims Location Grid Coordinate: [(1, 0), (28, 28), (27, 12), (9, 17), (29, 10), (20, 7), (23, 22)] | MARL Found: 3 | MARL Col: 0 | MARL Cov: 40.7% | Greedy Cov: 62.2%
+Difficulty: easy | Ep: 16 | Victims Location Grid Coordinate: [(10, 25), (12, 7), (13, 27), (14, 10), (19, 15), (24, 13), (21, 26)] | MARL Found: 0 | MARL Col: 224 | MARL Cov: 41.0% | Greedy Cov: 64.1%
+Difficulty: easy | Ep: 17 | Victims Location Grid Coordinate: [(18, 27), (16, 1), (12, 26), (22, 17), (7, 8), (15, 15), (9, 5)] | MARL Found: 1 | MARL Col: 0 | MARL Cov: 51.2% | Greedy Cov: 63.9%
+Difficulty: easy | Ep: 18 | Victims Location Grid Coordinate: [(15, 11), (3, 9), (29, 26), (7, 3), (22, 28), (14, 22), (10, 5)] | MARL Found: 1 | MARL Col: 30 | MARL Cov: 51.1% | Greedy Cov: 55.4%
+Difficulty: easy | Ep: 19 | Victims Location Grid Coordinate: [(24, 7), (4, 28), (8, 2), (8, 30), (1, 4), (4, 22), (10, 13)] | MARL Found: 2 | MARL Col: 156 | MARL Cov: 44.6% | Greedy Cov: 65.6%
+Difficulty: medium | Ep: 0 | Victims Location Grid Coordinate: [(23, 16), (17, 9), (30, 30), (0, 1), (7, 27), (27, 5), (29, 10)] | MARL Found: 3 | MARL Col: 0 | MARL Cov: 45.0% | Greedy Cov: 62.6%
+Difficulty: medium | Ep: 1 | Victims Location Grid Coordinate: [(6, 7), (1, 7), (8, 26), (19, 30), (6, 24), (26, 30), (7, 24)] | MARL Found: 2 | MARL Col: 0 | MARL Cov: 45.9% | Greedy Cov: 71.8%
+Difficulty: medium | Ep: 2 | Victims Location Grid Coordinate: [(27, 30), (10, 26), (16, 20), (4, 8), (2, 5), (4, 26), (10, 23)] | MARL Found: 2 | MARL Col: 0 | MARL Cov: 31.3% | Greedy Cov: 63.1%
+Difficulty: medium | Ep: 3 | Victims Location Grid Coordinate: [(14, 24), (19, 21), (15, 25), (21, 23), (28, 29), (30, 5), (4, 6)] | MARL Found: 2 | MARL Col: 104 | MARL Cov: 51.8% | Greedy Cov: 69.2%
+Difficulty: medium | Ep: 4 | Victims Location Grid Coordinate: [(26, 27), (28, 31), (8, 22), (16, 11), (13, 25), (11, 1), (27, 27)] | MARL Found: 1 | MARL Col: 12 | MARL Cov: 50.9% | Greedy Cov: 59.3%
+Difficulty: medium | Ep: 5 | Victims Location Grid Coordinate: [(29, 2), (14, 1), (8, 6), (26, 1), (28, 20), (16, 8), (0, 3)] | MARL Found: 2 | MARL Col: 0 | MARL Cov: 45.4% | Greedy Cov: 45.1%
+Difficulty: medium | Ep: 6 | Victims Location Grid Coordinate: [(1, 25), (3, 3), (13, 15), (20, 22), (2, 2), (11, 14), (10, 30)] | MARL Found: 1 | MARL Col: 38 | MARL Cov: 41.1% | Greedy Cov: 64.8%
+Difficulty: medium | Ep: 7 | Victims Location Grid Coordinate: [(2, 4), (2, 2), (30, 9), (21, 1), (8, 7), (2, 22), (0, 1)] | MARL Found: 2 | MARL Col: 0 | MARL Cov: 39.8% | Greedy Cov: 59.9%
+Difficulty: medium | Ep: 8 | Victims Location Grid Coordinate: [(13, 27), (25, 14), (18, 22), (20, 16), (4, 14), (20, 11), (6, 24)] | MARL Found: 0 | MARL Col: 0 | MARL Cov: 25.3% | Greedy Cov: 70.8%
+Difficulty: medium | Ep: 9 | Victims Location Grid Coordinate: [(18, 25), (1, 8), (20, 15), (11, 9), (3, 22), (10, 30), (24, 13)] | MARL Found: 1 | MARL Col: 0 | MARL Cov: 37.0% | Greedy Cov: 61.8%
+Difficulty: medium | Ep: 10 | Victims Location Grid Coordinate: [(27, 21), (21, 5), (11, 27), (12, 20), (1, 9), (23, 12), (13, 26)] | MARL Found: 1 | MARL Col: 0 | MARL Cov: 46.3% | Greedy Cov: 67.2%
+Difficulty: medium | Ep: 11 | Victims Location Grid Coordinate: [(18, 2), (26, 25), (2, 20), (21, 2), (4, 30), (22, 2), (31, 31)] | MARL Found: 3 | MARL Col: 0 | MARL Cov: 44.0% | Greedy Cov: 64.6%
+Difficulty: medium | Ep: 12 | Victims Location Grid Coordinate: [(27, 23), (20, 8), (21, 30), (10, 7), (13, 19), (26, 23), (18, 4)] | MARL Found: 0 | MARL Col: 0 | MARL Cov: 41.7% | Greedy Cov: 59.5%
+Difficulty: medium | Ep: 13 | Victims Location Grid Coordinate: [(16, 29), (7, 15), (30, 24), (25, 19), (5, 29), (2, 7), (28, 6)] | MARL Found: 2 | MARL Col: 0 | MARL Cov: 35.7% | Greedy Cov: 55.9%
+Difficulty: medium | Ep: 14 | Victims Location Grid Coordinate: [(8, 17), (4, 23), (23, 18), (1, 26), (7, 24), (4, 26), (3, 13)] | MARL Found: 0 | MARL Col: 0 | MARL Cov: 38.3% | Greedy Cov: 56.2%
+Difficulty: medium | Ep: 15 | Victims Location Grid Coordinate: [(7, 29), (3, 26), (31, 31), (17, 5), (26, 25), (30, 3), (1, 30)] | MARL Found: 2 | MARL Col: 0 | MARL Cov: 32.4% | Greedy Cov: 53.3%
+Difficulty: medium | Ep: 16 | Victims Location Grid Coordinate: [(9, 7), (18, 1), (21, 30), (30, 12), (30, 3), (30, 17), (12, 9)] | MARL Found: 0 | MARL Col: 46 | MARL Cov: 40.3% | Greedy Cov: 52.1%
+Difficulty: medium | Ep: 17 | Victims Location Grid Coordinate: [(13, 26), (7, 24), (17, 5), (25, 20), (29, 31), (30, 25), (12, 20)] | MARL Found: 1 | MARL Col: 0 | MARL Cov: 35.4% | Greedy Cov: 65.7%
+Difficulty: medium | Ep: 18 | Victims Location Grid Coordinate: [(29, 2), (10, 2), (18, 16), (27, 11), (28, 31), (10, 4), (6, 8)] | MARL Found: 3 | MARL Col: 0 | MARL Cov: 40.6% | Greedy Cov: 69.7%
+Difficulty: medium | Ep: 19 | Victims Location Grid Coordinate: [(20, 7), (1, 18), (15, 5), (27, 6), (26, 24), (26, 19), (8, 24)] | MARL Found: 2 | MARL Col: 190 | MARL Cov: 40.4% | Greedy Cov: 63.4%
+Difficulty: hard | Ep: 0 | Victims Location Grid Coordinate: [(12, 17), (19, 16), (3, 16), (15, 1), (14, 13), (27, 9), (0, 1)] | MARL Found: 2 | MARL Col: 0 | MARL Cov: 34.4% | Greedy Cov: 42.1%
+Difficulty: hard | Ep: 1 | Victims Location Grid Coordinate: [(22, 18), (21, 13), (1, 6), (8, 26), (24, 13), (2, 31), (17, 12)] | MARL Found: 2 | MARL Col: 0 | MARL Cov: 32.4% | Greedy Cov: 50.0%
+Difficulty: hard | Ep: 2 | Victims Location Grid Coordinate: [(15, 22), (24, 12), (1, 12), (19, 30), (4, 20), (1, 10), (12, 28)] | MARL Found: 0 | MARL Col: 0 | MARL Cov: 38.6% | Greedy Cov: 40.8%
+Difficulty: hard | Ep: 3 | Victims Location Grid Coordinate: [(0, 30), (23, 13), (11, 19), (23, 1), (10, 14), (2, 23), (26, 19)] | MARL Found: 2 | MARL Col: 0 | MARL Cov: 43.1% | Greedy Cov: 41.9%
+Difficulty: hard | Ep: 4 | Victims Location Grid Coordinate: [(1, 27), (27, 10), (2, 27), (28, 19), (25, 25), (3, 11), (1, 18)] | MARL Found: 1 | MARL Col: 0 | MARL Cov: 29.6% | Greedy Cov: 58.6%
+Difficulty: hard | Ep: 5 | Victims Location Grid Coordinate: [(13, 28), (29, 10), (27, 21), (8, 21), (16, 22), (15, 22), (24, 29)] | MARL Found: 0 | MARL Col: 0 | MARL Cov: 29.4% | Greedy Cov: 72.9%
+Difficulty: hard | Ep: 6 | Victims Location Grid Coordinate: [(17, 17), (29, 21), (26, 26), (13, 5), (13, 11), (6, 18), (2, 7)] | MARL Found: 1 | MARL Col: 0 | MARL Cov: 50.2% | Greedy Cov: 51.9%
+Difficulty: hard | Ep: 7 | Victims Location Grid Coordinate: [(27, 23), (8, 4), (10, 22), (7, 16), (29, 9), (9, 3), (30, 5)] | MARL Found: 2 | MARL Col: 0 | MARL Cov: 33.3% | Greedy Cov: 37.0%
+Difficulty: hard | Ep: 8 | Victims Location Grid Coordinate: [(20, 11), (28, 28), (7, 24), (25, 21), (24, 6), (29, 28), (1, 18)] | MARL Found: 3 | MARL Col: 0 | MARL Cov: 46.7% | Greedy Cov: 65.1%
+Difficulty: hard | Ep: 9 | Victims Location Grid Coordinate: [(25, 25), (23, 24), (5, 24), (28, 9), (29, 28), (19, 9), (8, 1)] | MARL Found: 3 | MARL Col: 0 | MARL Cov: 43.1% | Greedy Cov: 47.1%
+Difficulty: hard | Ep: 10 | Victims Location Grid Coordinate: [(6, 19), (16, 6), (20, 23), (4, 16), (19, 1), (9, 19), (7, 24)] | MARL Found: 0 | MARL Col: 0 | MARL Cov: 29.7% | Greedy Cov: 52.4%
+Difficulty: hard | Ep: 11 | Victims Location Grid Coordinate: [(25, 28), (9, 2), (23, 5), (4, 16), (28, 4), (18, 6), (21, 24)] | MARL Found: 2 | MARL Col: 330 | MARL Cov: 45.3% | Greedy Cov: 69.6%
+Difficulty: hard | Ep: 12 | Victims Location Grid Coordinate: [(28, 1), (11, 27), (10, 25), (27, 2), (18, 10), (23, 21), (6, 20)] | MARL Found: 1 | MARL Col: 0 | MARL Cov: 29.4% | Greedy Cov: 41.6%
+Difficulty: hard | Ep: 13 | Victims Location Grid Coordinate: [(26, 17), (29, 0), (24, 4), (30, 30), (8, 3), (4, 11), (15, 9)] | MARL Found: 2 | MARL Col: 0 | MARL Cov: 34.5% | Greedy Cov: 59.0%
+Difficulty: hard | Ep: 14 | Victims Location Grid Coordinate: [(24, 26), (30, 28), (21, 8), (18, 22), (28, 17), (7, 1), (29, 30)] | MARL Found: 2 | MARL Col: 0 | MARL Cov: 43.4% | Greedy Cov: 45.4%
+Difficulty: hard | Ep: 15 | Victims Location Grid Coordinate: [(23, 19), (13, 18), (10, 7), (15, 6), (29, 12), (7, 11), (21, 10)] | MARL Found: 1 | MARL Col: 0 | MARL Cov: 40.3% | Greedy Cov: 38.3%
+Difficulty: hard | Ep: 16 | Victims Location Grid Coordinate: [(25, 19), (30, 3), (28, 22), (31, 31), (6, 11), (25, 15), (3, 8)] | MARL Found: 3 | MARL Col: 0 | MARL Cov: 51.3% | Greedy Cov: 57.0%
+Difficulty: hard | Ep: 17 | Victims Location Grid Coordinate: [(26, 21), (9, 5), (1, 6), (24, 22), (22, 3), (29, 0), (29, 8)] | MARL Found: 2 | MARL Col: 12 | MARL Cov: 42.8% | Greedy Cov: 61.8%
+Difficulty: hard | Ep: 18 | Victims Location Grid Coordinate: [(27, 26), (31, 28), (3, 5), (10, 9), (9, 17), (5, 4), (28, 3)] | MARL Found: 3 | MARL Col: 0 | MARL Cov: 34.6% | Greedy Cov: 46.9%
+Difficulty: hard | Ep: 19 | Victims Location Grid Coordinate: [(3, 12), (8, 23), (4, 29), (25, 16), (26, 16), (3, 4), (0, 30)] | MARL Found: 2 | MARL Col: 0 | MARL Cov: 37.0% | Greedy Cov: 49.7%

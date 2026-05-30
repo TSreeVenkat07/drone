@@ -1,39 +1,20 @@
 checkpoint_dir: checkpoints
 curriculum:
-  difficulty_schedule:
-  - difficulty: easy
-    epoch: 0
-  - difficulty: medium
-    epoch: 10
-  - difficulty: hard
-    epoch: 20
-  - difficulty: easy
-    epoch: 30
-  - difficulty: medium
-    epoch: 40
-  - difficulty: hard
-    epoch: 50
-  - difficulty: easy
-    epoch: 60
-  - difficulty: medium
-    epoch: 70
-  - difficulty: hard
-    epoch: 80
+  difficulties:
+  - easy
+  - medium
+  - hard
   enabled: true
-  scenario_schedule:
-  - epoch: 0
-    scenario: building_collapse
-  - epoch: 30
-    scenario: wildfire
-  - epoch: 60
-    scenario: flood
-  - epoch: 90
-    scenario: all
+  scenarios:
+  - building_collapse
+  - wildfire
+  - flood
+  - all
   warmup_epochs: 5
 device: cuda
-episodes_per_epoch: 100
-eval_interval: 5
+episodes_per_epoch: 50
+eval_interval: 10
 log_dir: logs
 results_dir: results
 save_interval: 1
-total_epochs: 120
+total_epochs: 1

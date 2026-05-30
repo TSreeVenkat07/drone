@@ -12,6 +12,7 @@ from .per_buffer import PrioritizedReplayBuffer
 from .curriculum import CurriculumManager
 from evaluation import Evaluator
 from utils.logger import TrainingLogger
+from rewards.reward import Reward, REWARD_VERSION
 
 
 class CTDETrainer:
@@ -49,11 +50,9 @@ class CTDETrainer:
             for _ in range(self.n_agents)
         ]
 
-        # Centralized critic
-        self.critic = CentralizedCritic(
-            self.global_state_dim, self.n_agents, self.n_actions
-        ).to(self.device)
-        self.critic_optimizer = torch.optim.AdamW(self.critic.parameters(), lr=1e-4)
+        # VDN uses Value Decomposition, so no centralized critic is needed.
+        self.critic = None
+        self.critic_optimizer = None
 
         # PER buffer
         pcfg = self.acfg["per"]
@@ -76,22 +75,40 @@ class CTDETrainer:
         self.env_cfg = env_cfg
         self.reward_cfg = reward_cfg
 
+        # Initialize default shared reward function and assert version lock
+        self.reward_fn = Reward(reward_cfg=reward_cfg)
+        assert self.reward_fn.REWARD_VERSION == "v3_full_spectrum"
+
+    def set_reward_fn(self, reward_fn):
+        """Set a single shared reward function instance and assert version lock."""
+        self.reward_fn = reward_fn
+        assert self.reward_fn.REWARD_VERSION == "v3_full_spectrum"
+
     # ------------------------------------------------------------------ train
     def train(self, start_epoch: int = 0):
         if self.curriculum.should_load_prev(start_epoch):
-            loaded_epoch = self.curriculum.load_checkpoint(self.agents, self.critic)
+            loaded_epoch = self.curriculum.load_checkpoint(self.agents, self.critic, self.critic_optimizer)
             print(f"Resumed from epoch {loaded_epoch}")
+            start_epoch = loaded_epoch + 1
+            # REPLAY BUFFER RULE (CHECKPOINT ONLY)
+            if os.path.exists("checkpoint.pt"):
+                try:
+                    self.buffer = torch.load("checkpoint.pt", weights_only=False)
+                    self.buffer.trim_to_newest(keep_fraction=0.50)
+                    print("Replay buffer loaded from checkpoint.pt and trimmed to newest 50%.")
+                except Exception as e:
+                    print(f"Failed to load/trim replay buffer from checkpoint.pt: {e}")
             # Baseline evaluation on resume to populate venkateval.txt
             print("Running baseline evaluation on the resumed checkpoint...")
             try:
-                difficulty = self.curriculum.get_difficulty(loaded_epoch)
-                scenarios = self.curriculum.get_scenarios_for_epoch(loaded_epoch)
+                difficulty = self.curriculum.get_difficulty()
+                scenarios = self.curriculum.get_scenarios_for_epoch()
                 eval_metrics = self.evaluator.evaluate(difficulty, scenarios)
                 with open("venkateval.txt", "a") as f:
                     f.write(f"--- Baseline Eval on Resume (Epoch {loaded_epoch}) ---\n")
                     f.write(f"Epoch: {loaded_epoch} (resumed) | Scenario: {scenarios} | Difficulty: {difficulty}\n")
                     f.write(f"Cov Improv: {eval_metrics.get('coverage_improvement_pct', 0.0):+.1f}% | Latency Red: {eval_metrics.get('latency_reduction_pct', 0.0):+.1f}%\n")
-                    f.write(f"MARL Cov: {eval_metrics.get('avg_marl_coverage', 0.0):.1f}% | Vic: {eval_metrics.get('avg_marl_victims_found', 0.0):.2f}/7 | Col: {eval_metrics.get('avg_marl_collisions', 0.0):.1f}\n\n")
+                    f.write(f"MARL Cov: {eval_metrics.get('marl_coverage_pct', 0.0):.1f}% | Vic: {eval_metrics.get('avg_victims_found', 0.0):.2f}/7 | Col: {eval_metrics.get('avg_collisions', 0.0):.1f}\n\n")
                 print("Baseline evaluation written to venkateval.txt.")
             except Exception as e:
                 print(f"Error running baseline evaluation: {e}")
@@ -100,8 +117,9 @@ class CTDETrainer:
         eps_per_epoch = self.tcfg["episodes_per_epoch"]
 
         for epoch in range(start_epoch, total_epochs):
-            difficulty = self.curriculum.get_difficulty(epoch)
-            scenarios = self.curriculum.get_scenarios_for_epoch(epoch)
+            difficulty = self.curriculum.get_difficulty()
+            scenarios = self.curriculum.get_scenarios_for_epoch()
+            current_scenario = self.curriculum.get_scenario()
 
             epoch_metrics = {
                 "epoch": epoch, "difficulty": difficulty,
@@ -110,7 +128,7 @@ class CTDETrainer:
 
             for ep_idx in tqdm(range(eps_per_epoch), desc=f"Epoch {epoch % 10}/10 [{difficulty}]"):
                 scenario = scenarios[ep_idx % len(scenarios)]
-                ep_metrics = self._run_episode(scenario, difficulty, training=True)
+                ep_metrics = self._run_episode(scenario, difficulty, training=True, ep_idx=ep_idx)
                 epoch_metrics["episodes"].append(ep_metrics)
                 with open("live_track.txt", "a") as f:
                     f.write(f"Epoch {epoch}/{total_epochs} | Ep {ep_idx}/{eps_per_epoch} | Scen: {scenario} | Cov: {ep_metrics['coverage_pct']:.1f}% | Vic: {ep_metrics['victims_found']}/7 | Col: {ep_metrics['total_collisions']} | Steps: {ep_metrics['steps']}\n")
@@ -126,21 +144,12 @@ class CTDETrainer:
 
             is_eval_epoch = (epoch % self.tcfg["eval_interval"] == 0)
             
-            # Phase completion check
-            next_scenario = self.curriculum.get_scenario(epoch + 1)
-            current_scenario = self.curriculum.get_scenario(epoch)
-            next_difficulty = self.curriculum.get_difficulty(epoch + 1)
-            current_difficulty = self.curriculum.get_difficulty(epoch)
-
-            is_phase_complete = (next_scenario != current_scenario or epoch == total_epochs - 1)
-            is_diff_complete = (next_difficulty != current_difficulty and not is_phase_complete)
-
             def write_to_venkateval(label, metrics):
                 with open("venkateval.txt", "a") as f:
                     f.write(f"--- {label} ---\n")
-                    f.write(f"Epoch: {epoch} (completed) | Scenario: {current_scenario} | Difficulty: {current_difficulty}\n")
+                    f.write(f"Epoch: {epoch} (completed) | Scenario: {current_scenario} | Difficulty: {difficulty}\n")
                     f.write(f"Cov Improv: {metrics.get('coverage_improvement_pct', 0.0):+.1f}% | Latency Red: {metrics.get('latency_reduction_pct', 0.0):+.1f}%\n")
-                    f.write(f"MARL Cov: {metrics.get('avg_marl_coverage', 0.0):.1f}% | Vic: {metrics.get('avg_marl_victims_found', 0.0):.2f}/7 | Col: {metrics.get('avg_marl_collisions', 0.0):.1f}\n\n")
+                    f.write(f"MARL Cov: {metrics.get('marl_coverage_pct', 0.0):.1f}% | Vic: {metrics.get('avg_victims_found', 0.0):.2f}/7 | Col: {metrics.get('avg_collisions', 0.0):.1f}\n\n")
 
             # Evaluation vs greedy
             if is_eval_epoch:
@@ -150,44 +159,31 @@ class CTDETrainer:
                     print(f"  [EVAL] vs greedy: coverage_improvement={eval_metrics.get('coverage_improvement_pct', 0.0):+.1f}% | "
                           f"latency_reduction={eval_metrics.get('latency_reduction_pct', 0.0):+.1f}%")
                     write_to_venkateval(f"Routine Eval (Epoch {epoch})", eval_metrics)
+                    
+                    if eval_metrics.get("all_goals_achieved", False):
+                        print(f"\n🎉 MASTERY ACHIEVED: {current_scenario} ({difficulty}) 🎉")
+                        print("Advancing curriculum to next difficulty!")
+                        self.curriculum.advance_curriculum()
+                        write_to_venkateval(f"Difficulty Mastery Complete: {current_scenario} - {difficulty}", eval_metrics)
+                        
                 except Exception as e:
                     print(f"\n  [EVAL ERROR] Head-to-head evaluation failed! Error: {e}")
-            
-            # Difficulty completion test (Every 10 epochs)
-            if is_diff_complete:
-                print(f"\n--- Difficulty Phase Complete: {current_scenario} ({current_difficulty}) ---")
-                try:
-                    diff_eval_metrics = self.evaluator.evaluate(current_difficulty, [current_scenario], n_eval_eps=10)
-                    write_to_venkateval(f"Difficulty Phase Complete: {current_scenario} - {current_difficulty}", diff_eval_metrics)
-                    print("--- Difficulty Evaluation Complete ---\n")
-                except Exception as e:
-                    print(f"Difficulty evaluation error: {e}")
-
-            # Phase completion test (Every 30 epochs)
-            if is_phase_complete:
-                print(f"\n--- Environment Phase Complete: {current_scenario} ---")
-                eval_scenarios = [current_scenario] if current_scenario != "all" else ["building_collapse", "wildfire", "flood"]
-                print(f"Running comprehensive evaluation table testing {current_scenario} skills on {eval_scenarios}...")
-                try:
-                    phase_eval_metrics = self.evaluator.evaluate(current_difficulty, eval_scenarios, n_eval_eps=10)
-                    write_to_venkateval(f"Environment Phase Complete: {current_scenario} (Tested on {eval_scenarios})", phase_eval_metrics)
-                    print("--- Phase Evaluation Complete ---\n")
-                except Exception as e:
-                    print(f"Phase evaluation error: {e}")
 
             # STRICT SAVE FIRST (After all tests run for this epoch step)
-            if epoch % self.tcfg["save_interval"] == 0 or is_eval_epoch or is_diff_complete or is_phase_complete:
+            if epoch % self.tcfg["save_interval"] == 0 or is_eval_epoch:
                 print(f"[SAVE SECURED] Saving checkpoint to disk AFTER all evaluations (Epoch {epoch})...")
-                self.curriculum.save_checkpoint(self.agents, self.critic, epoch, agg)
-
-            if is_phase_complete:
-                input(f"\n[PAUSED] Training for {current_scenario} is complete! Review how it performed on the MIXED maps above. Press Enter to proceed...")
+                self.curriculum.save_checkpoint(self.agents, self.critic, self.critic_optimizer, epoch, agg, buffer=None)
+                print("Saved agent checkpoints without replay buffer (MemoryError prevention).")
 
     # --------------------------------------------------------------- episode
-    def _run_episode(self, scenario: str, difficulty: str, training: bool = True) -> Dict:
+    def _run_episode(self, scenario: str, difficulty: str, training: bool = True, ep_idx: int = 0) -> Dict:
         env = DisasterEnv(self.env_cfg, self.reward_cfg, scenario,
                           self.n_agents, difficulty)
+        
+        # Episode reset rule: reset collision counters and progressive penalties
+        self.reward_fn.on_episode_start()
         obs_dict, info = env.reset()
+        
         masks = info["action_masks"]
         done = False
         ep_rewards = np.zeros(self.n_agents)
@@ -201,9 +197,49 @@ class CTDETrainer:
                 key = f"agent_{i}"
                 actions[key] = self.agents[i].select_action(obs_dict[key], masks[key], explore=training)
 
-            next_obs_dict, rewards_dict, terminated, truncated, next_info = env.step(actions)
+            # Capture states before step
+            prev_positions = {i: tuple(env.agent_positions[i]) for i in range(self.n_agents)}
+            prev_coverage_map = env.coverage_map.copy()
+            prev_victim_found = env.victim_found.copy()
+            prev_thermal_map = env.thermal_map.copy()
+
+            next_obs_dict, env_rewards_dict, terminated, truncated, next_info = env.step(actions)
             done = terminated or truncated
             next_masks = next_info["action_masks"]
+
+            # Construct state and next_state dicts for reward_fn.compute_reward
+            state_dict = {
+                "agent_positions": prev_positions,
+                "coverage_map": prev_coverage_map,
+                "victim_found": prev_victim_found,
+                "obstacle_map": env.obstacle_map,
+                "victim_positions": env.victim_positions,
+                "thermal_map": prev_thermal_map,
+                "grid_size": env.grid_size,
+                "thermal_radius": env.thermal_radius,
+                "step_count": step,
+            }
+            next_state_dict = {
+                "agent_positions": {i: tuple(env.agent_positions[i]) for i in range(self.n_agents)},
+                "coverage_map": env.coverage_map.copy(),
+                "victim_found": env.victim_found.copy(),
+                "obstacle_map": env.obstacle_map,
+                "victim_positions": env.victim_positions,
+                "thermal_map": env.thermal_map.copy(),
+                "grid_size": env.grid_size,
+                "thermal_radius": env.thermal_radius,
+            }
+
+            # Compute reward using only compute_reward(agent, state, action, next_state)
+            rewards_dict = {}
+            for i in range(self.n_agents):
+                agent_key = f"agent_{i}"
+                rewards_dict[agent_key] = self.reward_fn.compute_reward(i, state_dict, actions[agent_key], next_state_dict)
+
+            # Debug check: print every 10 episodes on step 1
+            if ep_idx % 10 == 0 and step == 1:
+                print("REWARD VERSION:", self.reward_fn.REWARD_VERSION, flush=True)
+                print("Sample reward:", rewards_dict["agent_0"], flush=True)
 
             # Track first detection
             if next_info["victims_found"] > 0 and first_detection_step is None:
@@ -273,7 +309,9 @@ class CTDETrainer:
         dones_t = torch.FloatTensor(dones).to(self.device)
         gs_t = torch.FloatTensor(np.array(global_states)).to(self.device)
 
-        total_td = np.zeros(len(transitions))
+        current_q_list = []
+        next_q_val_list = []
+        rew_tot = torch.zeros(len(transitions), device=self.device)
 
         for i, agent in enumerate(self.agents):
             obs_t = torch.FloatTensor(np.array(obs_batch[i])).to(self.device)
@@ -289,49 +327,48 @@ class CTDETrainer:
                 next_actions = next_q_online.argmax(dim=-1, keepdim=True)
                 next_q_target = agent.target_net(nobs_t, nmask_t)
                 next_q_val = next_q_target.gather(1, next_actions).squeeze(-1)
-                target_q = rew_t + self.gamma * next_q_val * (1.0 - dones_t)
+                next_q_val_list.append(next_q_val)
 
             current_q = agent.online_net(obs_t, mask_t).gather(1, act_t.unsqueeze(1)).squeeze(-1)
-            td_errors = (target_q - current_q).detach().cpu().numpy()
-            total_td += np.abs(td_errors)
+            current_q_list.append(current_q)
+            rew_tot += rew_t
 
-            loss = (weights * F.smooth_l1_loss(current_q, target_q, reduction="none")).mean()
+        # VDN: Sum Q-values across all agents
+        current_q_tot = torch.stack(current_q_list, dim=0).sum(dim=0)
+        next_q_tot = torch.stack(next_q_val_list, dim=0).sum(dim=0)
+        target_q_tot = rew_tot + self.gamma * next_q_tot * (1.0 - dones_t)
 
+        td_errors = (target_q_tot - current_q_tot).detach().cpu().numpy()
+        total_td = np.abs(td_errors)
+        
+        # Global Loss
+        loss = (weights * F.smooth_l1_loss(current_q_tot, target_q_tot, reduction="none")).mean()
+
+        for agent in self.agents:
             agent.optimizer.zero_grad()
-            if agent.scaler is not None:
-                agent.scaler.scale(loss).backward()
-                agent.scaler.unscale_(agent.optimizer)
+
+        if any(a.scaler is not None for a in self.agents):
+            scaler = self.agents[0].scaler
+            scaler.scale(loss).backward()
+            for agent in self.agents:
+                scaler.unscale_(agent.optimizer)
                 torch.nn.utils.clip_grad_norm_(agent.online_net.parameters(), self.grad_clip)
-                agent.scaler.step(agent.optimizer)
-                agent.scaler.update()
-            else:
-                loss.backward()
+                scaler.step(agent.optimizer)
+            scaler.update()
+        else:
+            loss.backward()
+            for agent in self.agents:
                 torch.nn.utils.clip_grad_norm_(agent.online_net.parameters(), self.grad_clip)
                 agent.optimizer.step()
 
+        for agent in self.agents:
             agent.update_target()
 
-        self.buffer.update_priorities(indices, total_td / self.n_agents)
+        self.buffer.update_priorities(indices, total_td)
         self.update_count += 1
         if self.update_count % self.target_update_freq == 0:
             for agent in self.agents:
                 agent.hard_update_target()
-
-        # Update centralized critic
-        all_actions_oh = []
-        for i in range(self.n_agents):
-            ah = F.one_hot(torch.LongTensor(act_batch[i]), self.n_actions).float().to(self.device)
-            all_actions_oh.append(ah)
-        actions_cat = torch.cat(all_actions_oh, dim=-1)
-        shared_rew = torch.FloatTensor([
-            sum(t["rewards"]) / self.n_agents for t in transitions
-        ]).to(self.device)
-        v = self.critic(gs_t, actions_cat).squeeze(-1)
-        critic_loss = F.mse_loss(v, shared_rew)
-        self.critic_optimizer.zero_grad()
-        critic_loss.backward()
-        torch.nn.utils.clip_grad_norm_(self.critic.parameters(), self.grad_clip)
-        self.critic_optimizer.step()
 
     # ----------------------------------------------------------- aggregation
     def _aggregate_metrics(self, episodes: List[Dict]) -> Dict:

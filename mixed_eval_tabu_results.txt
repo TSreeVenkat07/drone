@@ -1,0 +1,37 @@
+======================================================================
+TABU WRAPPER EVALUATION REPORT (HISTORY=4) - MARL vs GREEDY
+Checkpoint: checkpoints/latest.pt
+======================================================================
+
+--- DIFFICULTY: EASY (10 eps) ---
+  Coverage:   MARL=61.7% | Greedy=46.4% | Improv: +32.9%
+  Latency:    MARL=8.4 steps | Greedy=5.9 steps | Reduc: -42.4%
+  Collisions: MARL=5.80/ep | Greedy=2716.00/ep
+  Det. Acc:   MARL=45.7% (Found: 3.20/7) | Greedy=37.1% (Found: 2.60/7)
+
+--- DIFFICULTY: MEDIUM (10 eps) ---
+  Coverage:   MARL=64.6% | Greedy=46.4% | Improv: +39.2%
+  Latency:    MARL=1.9 steps | Greedy=4.8 steps | Reduc: +60.4%
+  Collisions: MARL=13.60/ep | Greedy=2716.00/ep
+  Det. Acc:   MARL=35.7% (Found: 2.50/7) | Greedy=35.7% (Found: 2.50/7)
+
+--- DIFFICULTY: HARD (10 eps) ---
+  Coverage:   MARL=72.2% | Greedy=46.4% | Improv: +55.4%
+  Latency:    MARL=1.0 steps | Greedy=3.3 steps | Reduc: +69.7%
+  Collisions: MARL=0.00/ep | Greedy=2716.00/ep
+  Det. Acc:   MARL=48.6% (Found: 3.40/7) | Greedy=34.3% (Found: 2.40/7)
+
+======================================================================
+OVERALL COMBINED MIXED RESULTS (EASY + MEDIUM + HARD)
+======================================================================
+  Coverage:   MARL=66.2% | Greedy=46.4% | Improvement: +42.5%
+  Latency:    MARL=3.8steps | Greedy=4.7steps | Reduction: +19.3%
+  Collisions: MARL=6.47/ep | Greedy=2716.00/ep
+  Det. acc:   MARL=43.3% | Greedy=35.7% (Found MARL: 3.03/7 | Greedy: 2.50/7)
+  Goals:
+    [YES - MET] coverage_+30pct
+    [NO - NOT MET] latency_-20pct
+    [NO - NOT MET] collisions_0to2
+    [NO - NOT MET] detection_accuracy_90pct
+  ALL GOALS ACHIEVED: NO
+======================================================================

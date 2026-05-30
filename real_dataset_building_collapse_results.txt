@@ -1,0 +1,18 @@
+================================================================================
+REAL DATASET EVALUATION REPORT - BUILDING_COLLAPSE
+Checkpoint: checkpoints/latest.pt | Episodes: 10
+================================================================================
+
+Results for BUILDING_COLLAPSE:
+----------------------------------------
+  Coverage:   Ours=96.9% | Greedy=58.0% | Improvement: +67.1%
+  Latency:    Ours=5.6 steps | Greedy=56.3 steps | Reduction: +90.1%
+  Collisions: Ours=5.60/ep | Greedy=2714.00/ep
+  Det. Acc:   Ours=68.6% (Found: 4.80/7) | Greedy=30.0% (Found: 2.10/7)
+
+Goals Status:
+  [YES - MET] coverage_+30pct
+  [YES - MET] latency_-20pct
+  [NO - NOT MET] collisions_0to2
+  [NO - NOT MET] detection_accuracy_90pct
+================================================================================
