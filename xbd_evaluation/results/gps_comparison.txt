@@ -1,0 +1,351 @@
+================================================================================
+GPS LOCATION SAVING - COMPARISON REPORT
+================================================================================
+
+------------------------------------------------------------
+Scenario: hurricane-harvey_00000132_post_disaster
+------------------------------------------------------------
+  Ground Truth GPS Victim Locations: 31
+
+  MARL VDN (Tabu):
+    Unique GPS victim locations recorded: 25
+    GPS accuracy vs ground truth:        80.6%
+    UAV GPS path saved:                  YES
+    Sample UAV coords (first 5 steps):
+      Step 0, UAV 0: (29.909844, -89.999844)
+      Step 0, UAV 1: (29.909844, -89.991406)
+      Step 0, UAV 2: (29.901406, -89.999844)
+      Step 0, UAV 3: (29.901406, -89.991406)
+      Step 1, UAV 0: (29.909531, -89.999531)
+    GPS Saving Status:                   [OK] SUCCESSFUL
+
+  Greedy Baseline:
+    Unique GPS victim locations recorded: 0
+    GPS accuracy vs ground truth:        0.0%
+    UAV GPS path saved:                  YES
+    Sample UAV coords (first 5 steps):
+      Step 0, UAV 0: (29.909844, -89.999844)
+      Step 0, UAV 1: (29.909844, -89.991406)
+      Step 0, UAV 2: (29.901406, -89.999844)
+      Step 0, UAV 3: (29.901406, -89.991406)
+      Step 1, UAV 0: (29.909844, -89.999531)
+    GPS Saving Status:                   [OK] SUCCESSFUL
+
+------------------------------------------------------------
+Scenario: hurricane-harvey_00000137_post_disaster
+------------------------------------------------------------
+  Ground Truth GPS Victim Locations: 31
+
+  MARL VDN (Tabu):
+    Unique GPS victim locations recorded: 25
+    GPS accuracy vs ground truth:        80.6%
+    UAV GPS path saved:                  YES
+    Sample UAV coords (first 5 steps):
+      Step 0, UAV 0: (29.909844, -89.999844)
+      Step 0, UAV 1: (29.909844, -89.991406)
+      Step 0, UAV 2: (29.901406, -89.999844)
+      Step 0, UAV 3: (29.901406, -89.991406)
+      Step 1, UAV 0: (29.909531, -89.999531)
+    GPS Saving Status:                   [OK] SUCCESSFUL
+
+  Greedy Baseline:
+    Unique GPS victim locations recorded: 0
+    GPS accuracy vs ground truth:        0.0%
+    UAV GPS path saved:                  YES
+    Sample UAV coords (first 5 steps):
+      Step 0, UAV 0: (29.909844, -89.999844)
+      Step 0, UAV 1: (29.909844, -89.991406)
+      Step 0, UAV 2: (29.901406, -89.999844)
+      Step 0, UAV 3: (29.901406, -89.991406)
+      Step 1, UAV 0: (29.909844, -89.999531)
+    GPS Saving Status:                   [OK] SUCCESSFUL
+
+------------------------------------------------------------
+Scenario: mexico-earthquake_00001_post_disaster
+------------------------------------------------------------
+  Ground Truth GPS Victim Locations: 57
+
+  MARL VDN (Tabu):
+    Unique GPS victim locations recorded: 44
+    GPS accuracy vs ground truth:        77.2%
+    UAV GPS path saved:                  YES
+    Sample UAV coords (first 5 steps):
+      Step 0, UAV 0: (19.429844, -99.159844)
+      Step 0, UAV 1: (19.429844, -99.151406)
+      Step 0, UAV 2: (19.421406, -99.159844)
+      Step 0, UAV 3: (19.421406, -99.151094)
+      Step 1, UAV 0: (19.429531, -99.159844)
+    GPS Saving Status:                   [OK] SUCCESSFUL
+
+  Greedy Baseline:
+    Unique GPS victim locations recorded: 15
+    GPS accuracy vs ground truth:        26.3%
+    UAV GPS path saved:                  YES
+    Sample UAV coords (first 5 steps):
+      Step 0, UAV 0: (19.429844, -99.159844)
+      Step 0, UAV 1: (19.429844, -99.151406)
+      Step 0, UAV 2: (19.421406, -99.159844)
+      Step 0, UAV 3: (19.421406, -99.151094)
+      Step 1, UAV 0: (19.429844, -99.159531)
+    GPS Saving Status:                   [OK] SUCCESSFUL
+
+------------------------------------------------------------
+Scenario: midwest-flooding_00001_post_disaster
+------------------------------------------------------------
+  Ground Truth GPS Victim Locations: 49
+
+  MARL VDN (Tabu):
+    Unique GPS victim locations recorded: 37
+    GPS accuracy vs ground truth:        75.5%
+    UAV GPS path saved:                  YES
+    Sample UAV coords (first 5 steps):
+      Step 0, UAV 0: (29.960944, -90.123544)
+      Step 0, UAV 1: (29.960944, -90.115106)
+      Step 0, UAV 2: (29.952506, -90.123544)
+      Step 0, UAV 3: (29.952506, -90.115106)
+      Step 1, UAV 0: (29.960631, -90.123544)
+    GPS Saving Status:                   [OK] SUCCESSFUL
+
+  Greedy Baseline:
+    Unique GPS victim locations recorded: 13
+    GPS accuracy vs ground truth:        26.5%
+    UAV GPS path saved:                  YES
+    Sample UAV coords (first 5 steps):
+      Step 0, UAV 0: (29.960944, -90.123544)
+      Step 0, UAV 1: (29.960944, -90.115106)
+      Step 0, UAV 2: (29.952506, -90.123544)
+      Step 0, UAV 3: (29.952506, -90.115106)
+      Step 1, UAV 0: (29.960944, -90.123231)
+    GPS Saving Status:                   [OK] SUCCESSFUL
+
+------------------------------------------------------------
+Scenario: nepal-flooding_00002_post_disaster
+------------------------------------------------------------
+  Ground Truth GPS Victim Locations: 44
+
+  MARL VDN (Tabu):
+    Unique GPS victim locations recorded: 34
+    GPS accuracy vs ground truth:        77.3%
+    UAV GPS path saved:                  YES
+    Sample UAV coords (first 5 steps):
+      Step 0, UAV 0: (27.709844, 85.300156)
+      Step 0, UAV 1: (27.709844, 85.308594)
+      Step 0, UAV 2: (27.701406, 85.300156)
+      Step 0, UAV 3: (27.701406, 85.308594)
+      Step 1, UAV 0: (27.709844, 85.300469)
+    GPS Saving Status:                   [OK] SUCCESSFUL
+
+  Greedy Baseline:
+    Unique GPS victim locations recorded: 12
+    GPS accuracy vs ground truth:        27.3%
+    UAV GPS path saved:                  YES
+    Sample UAV coords (first 5 steps):
+      Step 0, UAV 0: (27.709844, 85.300156)
+      Step 0, UAV 1: (27.709844, 85.308594)
+      Step 0, UAV 2: (27.701406, 85.300156)
+      Step 0, UAV 3: (27.701406, 85.308594)
+      Step 1, UAV 0: (27.709844, 85.300469)
+    GPS Saving Status:                   [OK] SUCCESSFUL
+
+------------------------------------------------------------
+Scenario: palu-tsunami_00000118_post_disaster
+------------------------------------------------------------
+  Ground Truth GPS Victim Locations: 31
+
+  MARL VDN (Tabu):
+    Unique GPS victim locations recorded: 25
+    GPS accuracy vs ground truth:        80.6%
+    UAV GPS path saved:                  YES
+    Sample UAV coords (first 5 steps):
+      Step 0, UAV 0: (29.909844, -89.999844)
+      Step 0, UAV 1: (29.909844, -89.991406)
+      Step 0, UAV 2: (29.901406, -89.999844)
+      Step 0, UAV 3: (29.901406, -89.991406)
+      Step 1, UAV 0: (29.909531, -89.999531)
+    GPS Saving Status:                   [OK] SUCCESSFUL
+
+  Greedy Baseline:
+    Unique GPS victim locations recorded: 0
+    GPS accuracy vs ground truth:        0.0%
+    UAV GPS path saved:                  YES
+    Sample UAV coords (first 5 steps):
+      Step 0, UAV 0: (29.909844, -89.999844)
+      Step 0, UAV 1: (29.909844, -89.991406)
+      Step 0, UAV 2: (29.901406, -89.999844)
+      Step 0, UAV 3: (29.901406, -89.991406)
+      Step 1, UAV 0: (29.909844, -89.999531)
+    GPS Saving Status:                   [OK] SUCCESSFUL
+
+------------------------------------------------------------
+Scenario: palu-tsunami_00000182_post_disaster
+------------------------------------------------------------
+  Ground Truth GPS Victim Locations: 31
+
+  MARL VDN (Tabu):
+    Unique GPS victim locations recorded: 25
+    GPS accuracy vs ground truth:        80.6%
+    UAV GPS path saved:                  YES
+    Sample UAV coords (first 5 steps):
+      Step 0, UAV 0: (29.909844, -89.999844)
+      Step 0, UAV 1: (29.909844, -89.991406)
+      Step 0, UAV 2: (29.901406, -89.999844)
+      Step 0, UAV 3: (29.901406, -89.991406)
+      Step 1, UAV 0: (29.909531, -89.999531)
+    GPS Saving Status:                   [OK] SUCCESSFUL
+
+  Greedy Baseline:
+    Unique GPS victim locations recorded: 0
+    GPS accuracy vs ground truth:        0.0%
+    UAV GPS path saved:                  YES
+    Sample UAV coords (first 5 steps):
+      Step 0, UAV 0: (29.909844, -89.999844)
+      Step 0, UAV 1: (29.909844, -89.991406)
+      Step 0, UAV 2: (29.901406, -89.999844)
+      Step 0, UAV 3: (29.901406, -89.991406)
+      Step 1, UAV 0: (29.909844, -89.999531)
+    GPS Saving Status:                   [OK] SUCCESSFUL
+
+------------------------------------------------------------
+Scenario: palu-tsunami_00002_post_disaster
+------------------------------------------------------------
+  Ground Truth GPS Victim Locations: 45
+
+  MARL VDN (Tabu):
+    Unique GPS victim locations recorded: 39
+    GPS accuracy vs ground truth:        86.7%
+    UAV GPS path saved:                  YES
+    Sample UAV coords (first 5 steps):
+      Step 0, UAV 0: (-0.890156, 119.840156)
+      Step 0, UAV 1: (-0.890156, 119.848594)
+      Step 0, UAV 2: (-0.898594, 119.840156)
+      Step 0, UAV 3: (-0.898594, 119.848594)
+      Step 1, UAV 0: (-0.890156, 119.840469)
+    GPS Saving Status:                   [OK] SUCCESSFUL
+
+  Greedy Baseline:
+    Unique GPS victim locations recorded: 14
+    GPS accuracy vs ground truth:        31.1%
+    UAV GPS path saved:                  YES
+    Sample UAV coords (first 5 steps):
+      Step 0, UAV 0: (-0.890156, 119.840156)
+      Step 0, UAV 1: (-0.890156, 119.848594)
+      Step 0, UAV 2: (-0.898594, 119.840156)
+      Step 0, UAV 3: (-0.898594, 119.848594)
+      Step 1, UAV 0: (-0.890156, 119.840469)
+    GPS Saving Status:                   [OK] SUCCESSFUL
+
+------------------------------------------------------------
+Scenario: santa-rosa-wildfire_00000063_post_disaster
+------------------------------------------------------------
+  Ground Truth GPS Victim Locations: 31
+
+  MARL VDN (Tabu):
+    Unique GPS victim locations recorded: 25
+    GPS accuracy vs ground truth:        80.6%
+    UAV GPS path saved:                  YES
+    Sample UAV coords (first 5 steps):
+      Step 0, UAV 0: (29.909844, -89.999844)
+      Step 0, UAV 1: (29.909844, -89.991406)
+      Step 0, UAV 2: (29.901406, -89.999844)
+      Step 0, UAV 3: (29.901406, -89.991406)
+      Step 1, UAV 0: (29.909531, -89.999531)
+    GPS Saving Status:                   [OK] SUCCESSFUL
+
+  Greedy Baseline:
+    Unique GPS victim locations recorded: 0
+    GPS accuracy vs ground truth:        0.0%
+    UAV GPS path saved:                  YES
+    Sample UAV coords (first 5 steps):
+      Step 0, UAV 0: (29.909844, -89.999844)
+      Step 0, UAV 1: (29.909844, -89.991406)
+      Step 0, UAV 2: (29.901406, -89.999844)
+      Step 0, UAV 3: (29.901406, -89.991406)
+      Step 1, UAV 0: (29.909844, -89.999531)
+    GPS Saving Status:                   [OK] SUCCESSFUL
+
+------------------------------------------------------------
+Scenario: santa-rosa-wildfire_00000084_post_disaster
+------------------------------------------------------------
+  Ground Truth GPS Victim Locations: 31
+
+  MARL VDN (Tabu):
+    Unique GPS victim locations recorded: 25
+    GPS accuracy vs ground truth:        80.6%
+    UAV GPS path saved:                  YES
+    Sample UAV coords (first 5 steps):
+      Step 0, UAV 0: (29.909844, -89.999844)
+      Step 0, UAV 1: (29.909844, -89.991406)
+      Step 0, UAV 2: (29.901406, -89.999844)
+      Step 0, UAV 3: (29.901406, -89.991406)
+      Step 1, UAV 0: (29.909531, -89.999531)
+    GPS Saving Status:                   [OK] SUCCESSFUL
+
+  Greedy Baseline:
+    Unique GPS victim locations recorded: 0
+    GPS accuracy vs ground truth:        0.0%
+    UAV GPS path saved:                  YES
+    Sample UAV coords (first 5 steps):
+      Step 0, UAV 0: (29.909844, -89.999844)
+      Step 0, UAV 1: (29.909844, -89.991406)
+      Step 0, UAV 2: (29.901406, -89.999844)
+      Step 0, UAV 3: (29.901406, -89.991406)
+      Step 1, UAV 0: (29.909844, -89.999531)
+    GPS Saving Status:                   [OK] SUCCESSFUL
+
+------------------------------------------------------------
+Scenario: santa-rosa-wildfire_00002_post_disaster
+------------------------------------------------------------
+  Ground Truth GPS Victim Locations: 52
+
+  MARL VDN (Tabu):
+    Unique GPS victim locations recorded: 43
+    GPS accuracy vs ground truth:        82.7%
+    UAV GPS path saved:                  YES
+    Sample UAV coords (first 5 steps):
+      Step 0, UAV 0: (38.449844, -122.719844)
+      Step 0, UAV 1: (38.449844, -122.711094)
+      Step 0, UAV 2: (38.441406, -122.719844)
+      Step 0, UAV 3: (38.441406, -122.711406)
+      Step 1, UAV 0: (38.449844, -122.719531)
+    GPS Saving Status:                   [OK] SUCCESSFUL
+
+  Greedy Baseline:
+    Unique GPS victim locations recorded: 15
+    GPS accuracy vs ground truth:        28.8%
+    UAV GPS path saved:                  YES
+    Sample UAV coords (first 5 steps):
+      Step 0, UAV 0: (38.449844, -122.719844)
+      Step 0, UAV 1: (38.449844, -122.711094)
+      Step 0, UAV 2: (38.441406, -122.719844)
+      Step 0, UAV 3: (38.441406, -122.711406)
+      Step 1, UAV 0: (38.449844, -122.719531)
+    GPS Saving Status:                   [OK] SUCCESSFUL
+
+------------------------------------------------------------
+Scenario: socal-fire_00001_post_disaster
+------------------------------------------------------------
+  Ground Truth GPS Victim Locations: 42
+
+  MARL VDN (Tabu):
+    Unique GPS victim locations recorded: 35
+    GPS accuracy vs ground truth:        83.3%
+    UAV GPS path saved:                  YES
+    Sample UAV coords (first 5 steps):
+      Step 0, UAV 0: (34.279844, -118.749844)
+      Step 0, UAV 1: (34.279844, -118.741406)
+      Step 0, UAV 2: (34.271406, -118.749844)
+      Step 0, UAV 3: (34.271406, -118.741406)
+      Step 1, UAV 0: (34.279531, -118.749531)
+    GPS Saving Status:                   [OK] SUCCESSFUL
+
+  Greedy Baseline:
+    Unique GPS victim locations recorded: 19
+    GPS accuracy vs ground truth:        45.2%
+    UAV GPS path saved:                  YES
+    Sample UAV coords (first 5 steps):
+      Step 0, UAV 0: (34.279844, -118.749844)
+      Step 0, UAV 1: (34.279844, -118.741406)
+      Step 0, UAV 2: (34.271406, -118.749844)
+      Step 0, UAV 3: (34.271406, -118.741406)
+      Step 1, UAV 0: (34.279844, -118.749531)
+    GPS Saving Status:                   [OK] SUCCESSFUL

@@ -1,0 +1,36 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Checkpoints / Models
+*.pt
+*.pth
+*.h5
+uav_sar/checkpoints/*
+!uav_sar/checkpoints/latest.pt
+!uav_sar/checkpoints/.gitkeep
+
+# Logs
+*.log
+
+# Caches
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+.tox/
+
+# Virtual environments
+venv/
+env/
+.env/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Large Evaluation data
+xbd_evaluation/data/*
+!xbd_evaluation/data/.gitkeep
+!xbd_evaluation/data/selected/

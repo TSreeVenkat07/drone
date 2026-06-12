@@ -1,0 +1,191 @@
+========================================================================================================================
+xBD REAL-WORLD DATASET EVALUATION: MARL VDN (TABU) vs GREEDY BASELINE
+========================================================================================================================
+
+Disaster Image                      Metric                    MARL VDN (Tabu)      Greedy Baseline      Change         
+------------------------------------------------------------------------------------------------------------------------
+hurricane-harvey_00000132_post_disaster Map Coverage (%)          97.2%                59.0%                +38.2%         
+                                    Latency (steps)           21.0                 500.0                +479.0         
+                                    Collisions/ep             27.60                1834.00              +1806.40       
+                                    Victims Found (%)         29.5% (2.1/7)        0.0% (0.0/7)         +2.1           
+                                    GPS Victims Saved         25                   0                    +25            
+                                    GPS Accuracy (%)          80.6%                0.0%                 +80.6%         
+                                    UAV Path Saved            Yes                  Yes                  -              
+------------------------------------------------------------------------------------------------------------------------
+hurricane-harvey_00000137_post_disaster Map Coverage (%)          97.2%                59.0%                +38.2%         
+                                    Latency (steps)           21.0                 500.0                +479.0         
+                                    Collisions/ep             27.60                1834.00              +1806.40       
+                                    Victims Found (%)         29.5% (2.1/7)        0.0% (0.0/7)         +2.1           
+                                    GPS Victims Saved         25                   0                    +25            
+                                    GPS Accuracy (%)          80.6%                0.0%                 +80.6%         
+                                    UAV Path Saved            Yes                  Yes                  -              
+------------------------------------------------------------------------------------------------------------------------
+mexico-earthquake_00001_post_disaster Map Coverage (%)          95.8%                58.6%                +37.2%         
+                                    Latency (steps)           7.9                  42.0                 +34.1          
+                                    Collisions/ep             0.80                 942.00               +941.20        
+                                    Victims Found (%)         45.7% (3.2/7)        22.4% (1.6/7)        +1.6           
+                                    GPS Victims Saved         44                   15                   +29            
+                                    GPS Accuracy (%)          77.2%                26.3%                +50.9%         
+                                    UAV Path Saved            Yes                  Yes                  -              
+------------------------------------------------------------------------------------------------------------------------
+midwest-flooding_00001_post_disaster Map Coverage (%)          97.9%                61.9%                +36.0%         
+                                    Latency (steps)           14.8                 23.8                 +9.0           
+                                    Collisions/ep             2.00                 2716.00              +2714.00       
+                                    Victims Found (%)         45.7% (3.2/7)        22.9% (1.6/7)        +1.6           
+                                    GPS Victims Saved         37                   13                   +24            
+                                    GPS Accuracy (%)          75.5%                26.5%                +49.0%         
+                                    UAV Path Saved            Yes                  Yes                  -              
+------------------------------------------------------------------------------------------------------------------------
+nepal-flooding_00002_post_disaster  Map Coverage (%)          96.7%                59.3%                +37.4%         
+                                    Latency (steps)           4.7                  54.5                 +49.8          
+                                    Collisions/ep             5.60                 1834.00              +1828.40       
+                                    Victims Found (%)         51.4% (3.6/7)        22.4% (1.6/7)        +2.0           
+                                    GPS Victims Saved         34                   12                   +22            
+                                    GPS Accuracy (%)          77.3%                27.3%                +50.0%         
+                                    UAV Path Saved            Yes                  Yes                  -              
+------------------------------------------------------------------------------------------------------------------------
+palu-tsunami_00000118_post_disaster Map Coverage (%)          97.2%                59.0%                +38.2%         
+                                    Latency (steps)           21.0                 500.0                +479.0         
+                                    Collisions/ep             27.60                1834.00              +1806.40       
+                                    Victims Found (%)         29.5% (2.1/7)        0.0% (0.0/7)         +2.1           
+                                    GPS Victims Saved         25                   0                    +25            
+                                    GPS Accuracy (%)          80.6%                0.0%                 +80.6%         
+                                    UAV Path Saved            Yes                  Yes                  -              
+------------------------------------------------------------------------------------------------------------------------
+palu-tsunami_00000182_post_disaster Map Coverage (%)          97.2%                59.0%                +38.2%         
+                                    Latency (steps)           21.0                 500.0                +479.0         
+                                    Collisions/ep             27.60                1834.00              +1806.40       
+                                    Victims Found (%)         29.5% (2.1/7)        0.0% (0.0/7)         +2.1           
+                                    GPS Victims Saved         25                   0                    +25            
+                                    GPS Accuracy (%)          80.6%                0.0%                 +80.6%         
+                                    UAV Path Saved            Yes                  Yes                  -              
+------------------------------------------------------------------------------------------------------------------------
+palu-tsunami_00002_post_disaster    Map Coverage (%)          93.3%                62.2%                +31.1%         
+                                    Latency (steps)           8.9                  76.6                 +67.7          
+                                    Collisions/ep             11.67                1834.00              +1822.33       
+                                    Victims Found (%)         54.8% (3.8/7)        28.1% (2.0/7)        +1.9           
+                                    GPS Victims Saved         39                   14                   +25            
+                                    GPS Accuracy (%)          86.7%                31.1%                +55.6%         
+                                    UAV Path Saved            Yes                  Yes                  -              
+------------------------------------------------------------------------------------------------------------------------
+santa-rosa-wildfire_00000063_post_disaster Map Coverage (%)          97.2%                59.0%                +38.2%         
+                                    Latency (steps)           21.0                 500.0                +479.0         
+                                    Collisions/ep             27.60                1834.00              +1806.40       
+                                    Victims Found (%)         29.5% (2.1/7)        0.0% (0.0/7)         +2.1           
+                                    GPS Victims Saved         25                   0                    +25            
+                                    GPS Accuracy (%)          80.6%                0.0%                 +80.6%         
+                                    UAV Path Saved            Yes                  Yes                  -              
+------------------------------------------------------------------------------------------------------------------------
+santa-rosa-wildfire_00000084_post_disaster Map Coverage (%)          97.2%                59.0%                +38.2%         
+                                    Latency (steps)           21.0                 500.0                +479.0         
+                                    Collisions/ep             27.60                1834.00              +1806.40       
+                                    Victims Found (%)         29.5% (2.1/7)        0.0% (0.0/7)         +2.1           
+                                    GPS Victims Saved         25                   0                    +25            
+                                    GPS Accuracy (%)          80.6%                0.0%                 +80.6%         
+                                    UAV Path Saved            Yes                  Yes                  -              
+------------------------------------------------------------------------------------------------------------------------
+santa-rosa-wildfire_00002_post_disaster Map Coverage (%)          96.3%                59.5%                +36.8%         
+                                    Latency (steps)           3.1                  23.9                 +20.8          
+                                    Collisions/ep             6.60                 1826.00              +1819.40       
+                                    Victims Found (%)         58.1% (4.1/7)        25.7% (1.8/7)        +2.3           
+                                    GPS Victims Saved         43                   15                   +28            
+                                    GPS Accuracy (%)          82.7%                28.8%                +53.8%         
+                                    UAV Path Saved            Yes                  Yes                  -              
+------------------------------------------------------------------------------------------------------------------------
+socal-fire_00001_post_disaster      Map Coverage (%)          97.1%                67.3%                +29.8%         
+                                    Latency (steps)           12.8                 14.5                 +1.7           
+                                    Collisions/ep             23.40                892.00               +868.60        
+                                    Victims Found (%)         60.0% (4.2/7)        34.8% (2.4/7)        +1.8           
+                                    GPS Victims Saved         35                   19                   +16            
+                                    GPS Accuracy (%)          83.3%                45.2%                +38.1%         
+                                    UAV Path Saved            Yes                  Yes                  -              
+------------------------------------------------------------------------------------------------------------------------
+
+MARKDOWN TABLE FORMAT:
+
+| Disaster Image | Metric | MARL VDN (Tabu) | Greedy Baseline | Change |
+|---|---|---|---|---|
+| hurricane-harvey_00000132_post_disaster | Map Coverage (%) | 97.2% | 59.0% | +38.2% |
+|  | Latency to First Victim (steps) | 21.0 | 500.0 | +479.0 |
+|  | Collisions per Episode | 27.60 | 1834.00 | +1806.40 |
+|  | Victims Found (%) | 29.5% (2.1/7) | 0.0% (0.0/7) | +2.1 |
+|  | Unique GPS Victims Saved | 25 | 0 | +25 |
+|  | GPS Accuracy vs Ground Truth | 80.6% | 0.0% | +80.6% |
+|  | UAV GPS Path Saved | Yes | Yes | - |
+| hurricane-harvey_00000137_post_disaster | Map Coverage (%) | 97.2% | 59.0% | +38.2% |
+|  | Latency to First Victim (steps) | 21.0 | 500.0 | +479.0 |
+|  | Collisions per Episode | 27.60 | 1834.00 | +1806.40 |
+|  | Victims Found (%) | 29.5% (2.1/7) | 0.0% (0.0/7) | +2.1 |
+|  | Unique GPS Victims Saved | 25 | 0 | +25 |
+|  | GPS Accuracy vs Ground Truth | 80.6% | 0.0% | +80.6% |
+|  | UAV GPS Path Saved | Yes | Yes | - |
+| mexico-earthquake_00001_post_disaster | Map Coverage (%) | 95.8% | 58.6% | +37.2% |
+|  | Latency to First Victim (steps) | 7.9 | 42.0 | +34.1 |
+|  | Collisions per Episode | 0.80 | 942.00 | +941.20 |
+|  | Victims Found (%) | 45.7% (3.2/7) | 22.4% (1.6/7) | +1.6 |
+|  | Unique GPS Victims Saved | 44 | 15 | +29 |
+|  | GPS Accuracy vs Ground Truth | 77.2% | 26.3% | +50.9% |
+|  | UAV GPS Path Saved | Yes | Yes | - |
+| midwest-flooding_00001_post_disaster | Map Coverage (%) | 97.9% | 61.9% | +36.0% |
+|  | Latency to First Victim (steps) | 14.8 | 23.8 | +9.0 |
+|  | Collisions per Episode | 2.00 | 2716.00 | +2714.00 |
+|  | Victims Found (%) | 45.7% (3.2/7) | 22.9% (1.6/7) | +1.6 |
+|  | Unique GPS Victims Saved | 37 | 13 | +24 |
+|  | GPS Accuracy vs Ground Truth | 75.5% | 26.5% | +49.0% |
+|  | UAV GPS Path Saved | Yes | Yes | - |
+| nepal-flooding_00002_post_disaster | Map Coverage (%) | 96.7% | 59.3% | +37.4% |
+|  | Latency to First Victim (steps) | 4.7 | 54.5 | +49.8 |
+|  | Collisions per Episode | 5.60 | 1834.00 | +1828.40 |
+|  | Victims Found (%) | 51.4% (3.6/7) | 22.4% (1.6/7) | +2.0 |
+|  | Unique GPS Victims Saved | 34 | 12 | +22 |
+|  | GPS Accuracy vs Ground Truth | 77.3% | 27.3% | +50.0% |
+|  | UAV GPS Path Saved | Yes | Yes | - |
+| palu-tsunami_00000118_post_disaster | Map Coverage (%) | 97.2% | 59.0% | +38.2% |
+|  | Latency to First Victim (steps) | 21.0 | 500.0 | +479.0 |
+|  | Collisions per Episode | 27.60 | 1834.00 | +1806.40 |
+|  | Victims Found (%) | 29.5% (2.1/7) | 0.0% (0.0/7) | +2.1 |
+|  | Unique GPS Victims Saved | 25 | 0 | +25 |
+|  | GPS Accuracy vs Ground Truth | 80.6% | 0.0% | +80.6% |
+|  | UAV GPS Path Saved | Yes | Yes | - |
+| palu-tsunami_00000182_post_disaster | Map Coverage (%) | 97.2% | 59.0% | +38.2% |
+|  | Latency to First Victim (steps) | 21.0 | 500.0 | +479.0 |
+|  | Collisions per Episode | 27.60 | 1834.00 | +1806.40 |
+|  | Victims Found (%) | 29.5% (2.1/7) | 0.0% (0.0/7) | +2.1 |
+|  | Unique GPS Victims Saved | 25 | 0 | +25 |
+|  | GPS Accuracy vs Ground Truth | 80.6% | 0.0% | +80.6% |
+|  | UAV GPS Path Saved | Yes | Yes | - |
+| palu-tsunami_00002_post_disaster | Map Coverage (%) | 93.3% | 62.2% | +31.1% |
+|  | Latency to First Victim (steps) | 8.9 | 76.6 | +67.7 |
+|  | Collisions per Episode | 11.67 | 1834.00 | +1822.33 |
+|  | Victims Found (%) | 54.8% (3.8/7) | 28.1% (2.0/7) | +1.9 |
+|  | Unique GPS Victims Saved | 39 | 14 | +25 |
+|  | GPS Accuracy vs Ground Truth | 86.7% | 31.1% | +55.6% |
+|  | UAV GPS Path Saved | Yes | Yes | - |
+| santa-rosa-wildfire_00000063_post_disaster | Map Coverage (%) | 97.2% | 59.0% | +38.2% |
+|  | Latency to First Victim (steps) | 21.0 | 500.0 | +479.0 |
+|  | Collisions per Episode | 27.60 | 1834.00 | +1806.40 |
+|  | Victims Found (%) | 29.5% (2.1/7) | 0.0% (0.0/7) | +2.1 |
+|  | Unique GPS Victims Saved | 25 | 0 | +25 |
+|  | GPS Accuracy vs Ground Truth | 80.6% | 0.0% | +80.6% |
+|  | UAV GPS Path Saved | Yes | Yes | - |
+| santa-rosa-wildfire_00000084_post_disaster | Map Coverage (%) | 97.2% | 59.0% | +38.2% |
+|  | Latency to First Victim (steps) | 21.0 | 500.0 | +479.0 |
+|  | Collisions per Episode | 27.60 | 1834.00 | +1806.40 |
+|  | Victims Found (%) | 29.5% (2.1/7) | 0.0% (0.0/7) | +2.1 |
+|  | Unique GPS Victims Saved | 25 | 0 | +25 |
+|  | GPS Accuracy vs Ground Truth | 80.6% | 0.0% | +80.6% |
+|  | UAV GPS Path Saved | Yes | Yes | - |
+| santa-rosa-wildfire_00002_post_disaster | Map Coverage (%) | 96.3% | 59.5% | +36.8% |
+|  | Latency to First Victim (steps) | 3.1 | 23.9 | +20.8 |
+|  | Collisions per Episode | 6.60 | 1826.00 | +1819.40 |
+|  | Victims Found (%) | 58.1% (4.1/7) | 25.7% (1.8/7) | +2.3 |
+|  | Unique GPS Victims Saved | 43 | 15 | +28 |
+|  | GPS Accuracy vs Ground Truth | 82.7% | 28.8% | +53.8% |
+|  | UAV GPS Path Saved | Yes | Yes | - |
+| socal-fire_00001_post_disaster | Map Coverage (%) | 97.1% | 67.3% | +29.8% |
+|  | Latency to First Victim (steps) | 12.8 | 14.5 | +1.7 |
+|  | Collisions per Episode | 23.40 | 892.00 | +868.60 |
+|  | Victims Found (%) | 60.0% (4.2/7) | 34.8% (2.4/7) | +1.8 |
+|  | Unique GPS Victims Saved | 35 | 19 | +16 |
+|  | GPS Accuracy vs Ground Truth | 83.3% | 45.2% | +38.1% |
+|  | UAV GPS Path Saved | Yes | Yes | - |

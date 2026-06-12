@@ -1,0 +1,424 @@
+{
+  "metadata": {
+    "img": {
+      "width": 1024,
+      "height": 1024
+    },
+    "geo": {
+      "bounds": [
+        -99.16,
+        19.42,
+        -99.15,
+        19.43
+      ],
+      "lng": -99.155,
+      "lat": 19.425
+    },
+    "disaster": "mexico-earthquake",
+    "disaster_type": "building_collapse"
+  },
+  "features": {
+    "xy": [
+      {
+        "properties": {
+          "feature_type": "building",
+          "subtype": "destroyed",
+          "uid": "bldg_0000",
+          "wkt": "POLYGON ((853.9 586.3, 890.9 586.3, 890.9 610.2, 853.9 610.2, 853.9 586.3))"
+        }
+      },
+      {
+        "properties": {
+          "feature_type": "building",
+          "subtype": "no-damage",
+          "uid": "bldg_0001",
+          "wkt": "POLYGON ((395.5 767.7, 433.7 767.7, 433.7 788.9, 395.5 788.9, 395.5 767.7))"
+        }
+      },
+      {
+        "properties": {
+          "feature_type": "building",
+          "subtype": "minor-damage",
+          "uid": "bldg_0002",
+          "wkt": "POLYGON ((114.5 906.2, 132.6 906.2, 132.6 929.1, 114.5 929.1, 114.5 906.2))"
+        }
+      },
+      {
+        "properties": {
+          "feature_type": "building",
+          "subtype": "destroyed",
+          "uid": "bldg_0003",
+          "wkt": "POLYGON ((169.6 412.3, 198.0 412.3, 198.0 434.7, 169.6 434.7, 169.6 412.3))"
+        }
+      },
+      {
+        "properties": {
+          "feature_type": "building",
+          "subtype": "minor-damage",
+          "uid": "bldg_0004",
+          "wkt": "POLYGON ((859.2 880.1, 884.4 880.1, 884.4 911.0, 859.2 911.0, 859.2 880.1))"
+        }
+      },
+      {
+        "properties": {
+          "feature_type": "building",
+          "subtype": "no-damage",
+          "uid": "bldg_0005",
+          "wkt": "POLYGON ((229.1 144.3, 272.3 144.3, 272.3 185.9, 229.1 185.9, 229.1 144.3))"
+        }
+      },
+      {
+        "properties": {
+          "feature_type": "building",
+          "subtype": "major-damage",
+          "uid": "bldg_0006",
+          "wkt": "POLYGON ((514.6 486.8, 545.5 486.8, 545.5 517.9, 514.6 517.9, 514.6 486.8))"
+        }
+      },
+      {
+        "properties": {
+          "feature_type": "building",
+          "subtype": "minor-damage",
+          "uid": "bldg_0007",
+          "wkt": "POLYGON ((113.1 113.9, 156.7 113.9, 156.7 143.4, 113.1 143.4, 113.1 113.9))"
+        }
+      },
+      {
+        "properties": {
+          "feature_type": "building",
+          "subtype": "major-damage",
+          "uid": "bldg_0008",
+          "wkt": "POLYGON ((156.9 556.4, 178.1 556.4, 178.1 579.0, 156.9 579.0, 156.9 556.4))"
+        }
+      },
+      {
+        "properties": {
+          "feature_type": "building",
+          "subtype": "major-damage",
+          "uid": "bldg_0009",
+          "wkt": "POLYGON ((109.5 922.2, 134.1 922.2, 134.1 955.5, 109.5 955.5, 109.5 922.2))"
+        }
+      },
+      {
+        "properties": {
+          "feature_type": "building",
+          "subtype": "no-damage",
+          "uid": "bldg_0010",
+          "wkt": "POLYGON ((399.8 522.3, 420.4 522.3, 420.4 567.0, 399.8 567.0, 399.8 522.3))"
+        }
+      },
+      {
+        "properties": {
+          "feature_type": "building",
+          "subtype": "destroyed",
+          "uid": "bldg_0011",
+          "wkt": "POLYGON ((749.6 458.7, 769.2 458.7, 769.2 501.3, 749.6 501.3, 749.6 458.7))"
+        }
+      },
+      {
+        "properties": {
+          "feature_type": "building",
+          "subtype": "major-damage",
+          "uid": "bldg_0012",
+          "wkt": "POLYGON ((31.9 333.8, 70.7 333.8, 70.7 367.5, 31.9 367.5, 31.9 333.8))"
+        }
+      },
+      {
+        "properties": {
+          "feature_type": "building",
+          "subtype": "major-damage",
+          "uid": "bldg_0013",
+          "wkt": "POLYGON ((791.3 203.0, 834.0 203.0, 834.0 231.1, 791.3 231.1, 791.3 203.0))"
+        }
+      },
+      {
+        "properties": {
+          "feature_type": "building",
+          "subtype": "destroyed",
+          "uid": "bldg_0014",
+          "wkt": "POLYGON ((-9.3 1008.8, 14.1 1008.8, 14.1 1025.6, -9.3 1025.6, -9.3 1008.8))"
+        }
+      },
+      {
+        "properties": {
+          "feature_type": "building",
+          "subtype": "no-damage",
+          "uid": "bldg_0015",
+          "wkt": "POLYGON ((115.1 142.6, 149.1 142.6, 149.1 169.4, 115.1 169.4, 115.1 142.6))"
+        }
+      },
+      {
+        "properties": {
+          "feature_type": "building",
+          "subtype": "destroyed",
+          "uid": "bldg_0016",
+          "wkt": "POLYGON ((312.4 726.2, 341.2 726.2, 341.2 761.0, 312.4 761.0, 312.4 726.2))"
+        }
+      },
+      {
+        "properties": {
+          "feature_type": "building",
+          "subtype": "destroyed",
+          "uid": "bldg_0017",
+          "wkt": "POLYGON ((471.5 962.7, 496.8 962.7, 496.8 983.0, 471.5 983.0, 471.5 962.7))"
+        }
+      },
+      {
+        "properties": {
+          "feature_type": "building",
+          "subtype": "major-damage",
+          "uid": "bldg_0018",
+          "wkt": "POLYGON ((852.1 20.3, 880.6 20.3, 880.6 62.1, 852.1 62.1, 852.1 20.3))"
+        }
+      },
+      {
+        "properties": {
+          "feature_type": "building",
+          "subtype": "no-damage",
+          "uid": "bldg_0019",
+          "wkt": "POLYGON ((998.2 532.1, 1033.0 532.1, 1033.0 556.2, 998.2 556.2, 998.2 532.1))"
+        }
+      },
+      {
+        "properties": {
+          "feature_type": "building",
+          "subtype": "no-damage",
+          "uid": "bldg_0020",
+          "wkt": "POLYGON ((361.6 740.3, 388.7 740.3, 388.7 772.2, 361.6 772.2, 361.6 740.3))"
+        }
+      },
+      {
+        "properties": {
+          "feature_type": "building",
+          "subtype": "no-damage",
+          "uid": "bldg_0021",
+          "wkt": "POLYGON ((507.4 911.7, 534.9 911.7, 534.9 946.1, 507.4 946.1, 507.4 911.7))"
+        }
+      },
+      {
+        "properties": {
+          "feature_type": "building",
+          "subtype": "major-damage",
+          "uid": "bldg_0022",
+          "wkt": "POLYGON ((408.6 441.7, 427.3 441.7, 427.3 459.5, 408.6 459.5, 408.6 441.7))"
+        }
+      },
+      {
+        "properties": {
+          "feature_type": "building",
+          "subtype": "destroyed",
+          "uid": "bldg_0023",
+          "wkt": "POLYGON ((663.5 666.4, 679.0 666.4, 679.0 691.2, 663.5 691.2, 663.5 666.4))"
+        }
+      },
+      {
+        "properties": {
+          "feature_type": "building",
+          "subtype": "no-damage",
+          "uid": "bldg_0024",
+          "wkt": "POLYGON ((785.6 863.8, 808.0 863.8, 808.0 898.8, 785.6 898.8, 785.6 863.8))"
+        }
+      },
+      {
+        "properties": {
+          "feature_type": "building",
+          "subtype": "destroyed",
+          "uid": "bldg_0025",
+          "wkt": "POLYGON ((270.0 124.4, 293.5 124.4, 293.5 159.6, 270.0 159.6, 270.0 124.4))"
+        }
+      },
+      {
+        "properties": {
+          "feature_type": "building",
+          "subtype": "destroyed",
+          "uid": "bldg_0026",
+          "wkt": "POLYGON ((189.4 533.3, 225.4 533.3, 225.4 576.9, 189.4 576.9, 189.4 533.3))"
+        }
+      },
+      {
+        "properties": {
+          "feature_type": "building",
+          "subtype": "minor-damage",
+          "uid": "bldg_0027",
+          "wkt": "POLYGON ((248.9 618.3, 273.5 618.3, 273.5 662.6, 248.9 662.6, 248.9 618.3))"
+        }
+      },
+      {
+        "properties": {
+          "feature_type": "building",
+          "subtype": "minor-damage",
+          "uid": "bldg_0028",
+          "wkt": "POLYGON ((688.4 3.2, 715.4 3.2, 715.4 44.4, 688.4 44.4, 688.4 3.2))"
+        }
+      },
+      {
+        "properties": {
+          "feature_type": "building",
+          "subtype": "minor-damage",
+          "uid": "bldg_0029",
+          "wkt": "POLYGON ((434.3 946.1, 474.9 946.1, 474.9 970.7, 434.3 970.7, 434.3 946.1))"
+        }
+      },
+      {
+        "properties": {
+          "feature_type": "building",
+          "subtype": "no-damage",
+          "uid": "bldg_0030",
+          "wkt": "POLYGON ((489.1 636.2, 514.1 636.2, 514.1 658.5, 489.1 658.5, 489.1 636.2))"
+        }
+      },
+      {
+        "properties": {
+          "feature_type": "building",
+          "subtype": "major-damage",
+          "uid": "bldg_0031",
+          "wkt": "POLYGON ((923.9 844.9, 968.2 844.9, 968.2 882.2, 923.9 882.2, 923.9 844.9))"
+        }
+      },
+      {
+        "properties": {
+          "feature_type": "building",
+          "subtype": "minor-damage",
+          "uid": "bldg_0032",
+          "wkt": "POLYGON ((766.5 481.0, 795.2 481.0, 795.2 503.2, 766.5 503.2, 766.5 481.0))"
+        }
+      },
+      {
+        "properties": {
+          "feature_type": "building",
+          "subtype": "no-damage",
+          "uid": "bldg_0033",
+          "wkt": "POLYGON ((280.0 250.3, 312.6 250.3, 312.6 277.6, 280.0 277.6, 280.0 250.3))"
+        }
+      },
+      {
+        "properties": {
+          "feature_type": "building",
+          "subtype": "destroyed",
+          "uid": "bldg_0034",
+          "wkt": "POLYGON ((825.6 873.6, 845.7 873.6, 845.7 888.8, 825.6 888.8, 825.6 873.6))"
+        }
+      },
+      {
+        "properties": {
+          "feature_type": "building",
+          "subtype": "minor-damage",
+          "uid": "bldg_0035",
+          "wkt": "POLYGON ((807.1 840.2, 826.2 840.2, 826.2 878.4, 807.1 878.4, 807.1 840.2))"
+        }
+      },
+      {
+        "properties": {
+          "feature_type": "building",
+          "subtype": "destroyed",
+          "uid": "bldg_0036",
+          "wkt": "POLYGON ((389.0 1012.8, 409.8 1012.8, 409.8 1032.4, 389.0 1032.4, 389.0 1012.8))"
+        }
+      },
+      {
+        "properties": {
+          "feature_type": "building",
+          "subtype": "major-damage",
+          "uid": "bldg_0037",
+          "wkt": "POLYGON ((612.3 946.7, 656.8 946.7, 656.8 963.8, 612.3 963.8, 612.3 946.7))"
+        }
+      },
+      {
+        "properties": {
+          "feature_type": "building",
+          "subtype": "destroyed",
+          "uid": "bldg_0038",
+          "wkt": "POLYGON ((788.9 259.7, 830.5 259.7, 830.5 294.6, 788.9 294.6, 788.9 259.7))"
+        }
+      },
+      {
+        "properties": {
+          "feature_type": "building",
+          "subtype": "destroyed",
+          "uid": "bldg_0039",
+          "wkt": "POLYGON ((838.7 164.8, 866.4 164.8, 866.4 196.4, 838.7 196.4, 838.7 164.8))"
+        }
+      },
+      {
+        "properties": {
+          "feature_type": "building",
+          "subtype": "major-damage",
+          "uid": "bldg_0040",
+          "wkt": "POLYGON ((680.3 645.9, 725.0 645.9, 725.0 690.8, 680.3 690.8, 680.3 645.9))"
+        }
+      },
+      {
+        "properties": {
+          "feature_type": "building",
+          "subtype": "major-damage",
+          "uid": "bldg_0041",
+          "wkt": "POLYGON ((75.3 733.0, 119.6 733.0, 119.6 757.6, 75.3 757.6, 75.3 733.0))"
+        }
+      },
+      {
+        "properties": {
+          "feature_type": "building",
+          "subtype": "minor-damage",
+          "uid": "bldg_0042",
+          "wkt": "POLYGON ((417.4 39.9, 452.6 39.9, 452.6 65.5, 417.4 65.5, 417.4 39.9))"
+        }
+      },
+      {
+        "properties": {
+          "feature_type": "building",
+          "subtype": "destroyed",
+          "uid": "bldg_0043",
+          "wkt": "POLYGON ((838.3 828.6, 865.8 828.6, 865.8 853.3, 838.3 853.3, 838.3 828.6))"
+        }
+      },
+      {
+        "properties": {
+          "feature_type": "building",
+          "subtype": "major-damage",
+          "uid": "bldg_0044",
+          "wkt": "POLYGON ((799.7 493.4, 841.5 493.4, 841.5 512.7, 799.7 512.7, 799.7 493.4))"
+        }
+      },
+      {
+        "properties": {
+          "feature_type": "building",
+          "subtype": "destroyed",
+          "uid": "bldg_0045",
+          "wkt": "POLYGON ((82.9 148.7, 113.9 148.7, 113.9 165.7, 82.9 165.7, 82.9 148.7))"
+        }
+      },
+      {
+        "properties": {
+          "feature_type": "building",
+          "subtype": "major-damage",
+          "uid": "bldg_0046",
+          "wkt": "POLYGON ((-18.6 438.8, 19.7 438.8, 19.7 454.8, -18.6 454.8, -18.6 438.8))"
+        }
+      },
+      {
+        "properties": {
+          "feature_type": "building",
+          "subtype": "minor-damage",
+          "uid": "bldg_0047",
+          "wkt": "POLYGON ((833.2 151.6, 852.6 151.6, 852.6 192.4, 833.2 192.4, 833.2 151.6))"
+        }
+      },
+      {
+        "properties": {
+          "feature_type": "building",
+          "subtype": "no-damage",
+          "uid": "bldg_0048",
+          "wkt": "POLYGON ((543.0 825.4, 560.8 825.4, 560.8 852.3, 543.0 852.3, 543.0 825.4))"
+        }
+      },
+      {
+        "properties": {
+          "feature_type": "building",
+          "subtype": "no-damage",
+          "uid": "bldg_0049",
+          "wkt": "POLYGON ((248.6 751.6, 278.7 751.6, 278.7 789.1, 248.6 789.1, 248.6 751.6))"
+        }
+      }
+    ]
+  }
+}

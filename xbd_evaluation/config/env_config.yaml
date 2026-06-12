@@ -1,0 +1,21 @@
+grid_size: 32
+n_agents: 4
+n_victims: 7
+max_steps: 500
+local_obs_radius: 5
+thermal_radius: 2
+agent_battery_max: 500
+scenarios:
+  - building_collapse
+  - wildfire
+  - flood
+difficulties:
+  easy:
+    obstacle_density: 0.10
+    victim_visibility: 0.9
+  medium:
+    obstacle_density: 0.20
+    victim_visibility: 0.7
+  hard:
+    obstacle_density: 0.35
+    victim_visibility: 0.5
