@@ -1,0 +1,19 @@
+======================================================================
+FINAL EVALUATION REPORT - BLIND ENVIRONMENT (RANDOM SCENARIOS)
+Checkpoint: checkpoints/latest.pt
+======================================================================
+OVERALL COMBINED MIXED RESULTS (5 eps)
+======================================================================
+  Coverage:   MARL=79.8% | Greedy=52.8% | Improv: +51.3%
+  Latency:    MARL=2.2 steps | Greedy=4.4 steps | Reduc: +50.0%
+  Collisions: MARL=10.40/ep | Greedy=1466.80/ep
+  Det. Acc:   42.9% (Found: 3.00)
+
+======================================================================
+DETAILED EPISODE LOG
+======================================================================
+Ep  0 | Env: flood              | Diff: hard    | MARL Found: 3 | MARL Col:  0 | MARL Cov: 84.7% | Greedy Cov: 46.4%
+Ep  1 | Env: building_collapse  | Diff: easy    | MARL Found: 5 | MARL Col:  0 | MARL Cov: 86.7% | Greedy Cov: 65.6%
+Ep  2 | Env: building_collapse  | Diff: hard    | MARL Found: 2 | MARL Col:  0 | MARL Cov: 74.8% | Greedy Cov: 43.8%
+Ep  3 | Env: wildfire           | Diff: medium  | MARL Found: 3 | MARL Col:  0 | MARL Cov: 81.1% | Greedy Cov: 51.6%
+Ep  4 | Env: building_collapse  | Diff: hard    | MARL Found: 2 | MARL Col: 52 | MARL Cov: 71.9% | Greedy Cov: 56.3%
