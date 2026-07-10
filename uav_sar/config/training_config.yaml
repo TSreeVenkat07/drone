@@ -1,0 +1,20 @@
+checkpoint_dir: checkpoints
+curriculum:
+  difficulties:
+  - easy
+  - medium
+  - hard
+  enabled: true
+  scenarios:
+  - building_collapse
+  - wildfire
+  - flood
+  - all
+  warmup_epochs: 5
+device: cuda
+episodes_per_epoch: 50
+eval_interval: 10
+log_dir: logs
+results_dir: results
+save_interval: 1
+total_epochs: 1

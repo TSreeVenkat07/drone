@@ -1,0 +1,47 @@
+tier1_victim:
+  first_detection: 80.0
+  thermal_confirmation: 150.0
+  multi_agent_corroboration: 30.0
+  all_victims_found: 500.0
+  detection_speed_bonus_max: 100.0
+  detection_speed_decay: 0.997
+  false_positive_penalty: -40.0
+  missed_victim_end_penalty: -100.0
+
+tier2_safety:
+  wall_collision: -25.0 # Reduced from -50 to cure fear paralysis
+  agent_collision: -30.0 # Reduced from -60
+  near_wall_soft: 0.0
+  near_agent_soft: -1.0
+  repeated_collision_threshold: 3
+  repeated_collision_multiplier: 2.0
+  out_of_bounds: -80.0
+
+tier3_coverage:
+  new_cell: 15.0  # Increased from 8.0 to make exploration worth the risk of moving
+  frontier_bonus: 20.0  # Increased from 3.0 to heavily pull agents toward unknown areas
+  deep_exploration_bonus: 5.0 # NEW: Reward for reaching deep corners / dead ends
+  redundant_penalty: -2.5
+  zone_clearance: 15.0
+  milestone_25pct: 20.0
+  milestone_50pct: 40.0
+  milestone_75pct: 80.0
+  milestone_100pct: 200.0
+
+tier4_coordination:
+  good_spread_bonus: 10.0  # Increased from 2.5 to stop agents from clustering safely
+  traffic_yield_bonus: 5.0 # NEW: Reward for backing up/yielding in tight spaces
+  overlap_penalty: -1.0
+  formation_bonus: 2.0
+  search_pattern_bonus: 1.0
+
+tier5_temporal:
+  time_step_penalty: -1.5  # Increased from -0.05 to severely punish doing nothing
+  mission_complete: 300.0
+  hover_penalty: -8.0  # Increased from -0.5 to directly outlaw idle behavior
+  efficient_path: 0.2
+  battery_conservation: 0.1
+
+tier6_fema:
+  wall_follow_bonus: 0.5
+  straight_line_bonus: 0.2

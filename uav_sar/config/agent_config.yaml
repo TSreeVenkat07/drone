@@ -1,0 +1,25 @@
+network:
+  hidden_dims: [256, 256]
+  dueling: true
+  action_masking: true
+  dropout: 0.1
+
+training:
+  learning_rate: 0.0003
+  gamma: 0.99
+  tau: 0.005
+  epsilon_start: 1.0
+  epsilon_end: 0.10
+  epsilon_decay: 0.99995
+  batch_size: 64
+  target_update_freq: 100
+  grad_clip: 10.0
+  fp16: true
+
+per:
+  buffer_size: 100000
+  alpha: 0.6
+  beta_start: 0.4
+  beta_end: 1.0
+  beta_steps: 100000
+  epsilon: 1.0e-6
